@@ -1,11 +1,13 @@
 \chapter{Sets}
 
 Sets are one of the most basic mathematical tools. The purpose of this
-chapter is to define sets, and do basic reasoning about them. Spoiler:
-it will later turn out that much of what we do in this chapter is
-actually wrong, and can lead to some contradictions.\footnote{If
-  you're really impatient, and can't wait for another chapter, you can
-  read the \link{Wikipedia page on Russell's
+chapter is to define sets, and do basic reasoning about them. We're
+also going to give a loose definition of common sets we deal
+with. Spoiler: it will later turn out that much of what we do in this
+chapter is actually wrong, and can lead to some
+contradictions.\footnote{If you're really impatient, and can't wait
+  for another chapter, you can read the \link{Wikipedia page on
+    Russell's
     paradox}{https://en.wikipedia.org/wiki/Russell\%27s_paradox}}
 
 Sets are collections of objects. The easiest way to denote sets is to
@@ -18,7 +20,7 @@ list their elements between curly braces: $\braces{}$.
 There is no notion of duplication or order, so all of the following
 sets are the same
 
-\begin{tabu}{rp{8.5cm}}
+\begin{tabu}{rp{5.5cm}}
   $\mset{1,2,3,4}$         & \\
   $\mset{1,1,2,2,3,3,4,4}$ & (Each element is duplicated.) \\
   $\mset{2,1,4,3,4,4,1}$   & (The order is different, and some of the elements are duplicated.)
@@ -78,7 +80,7 @@ Before we go much further, I want to introduce the notion of a ``set
 comprehension'', or ``set builder notation''. The basic format is this:
 
 \begin{displaymath}
-  \scomp{\text{\rmfamily What each element looks like}}{\text{\rmfamily Conditions}}
+  \scomp{\text{What each element looks like}}{\text{Conditions about the element}}
 \end{displaymath}
 
 The ``conditions'' are just things that have to hold true about the
@@ -165,3 +167,216 @@ True
 ghci> fromList [1,2,3,4] == fromList [1,4,3,1,2]
 True
 \end{lstlisting}
+
+\section{Rational and Real Numbers}
+
+The reason I introduced the set comprehension notation is because (1)
+it's useful and important, and (2) it's convenient to define the
+rational numbers (numbers that can be expressed as a ratio of two
+integers) like this:
+
+\begin{displaymath}
+  \Q = \scomp{\frac{x}{y} \in \R}{x, y \in \Z; y \ne 0}
+\end{displaymath}
+
+Remember, kids: \xtb{you can't divide by zero}, hence the $y \ne 0$
+part. The notation $x, y \in \Z$ is just shorthand for $x \in \Z$ and
+$y \in \Z$. Mathematicians are incredibly lazy, so you'll often see
+confusing notational shorthand used as a replacement for actually
+explaining an idea. The symbol $\R$ refers to the ``real
+numbers''. The symbol $\Q$ stands for ``quotient''.
+
+Rational numbers are numbers that can be expressed as a ratio of two
+integers. Real numbers turn out to be really hard to define. You can
+for now think of a real number as any number that can be written down,
+supposing one had infinite paper, ink, and time. For instance, $\pi$
+cannot be expressed as the ratio of two integers, but is a real
+number.
+
+\subsection{Numerical representations of Real numbers}
+
+As it turns out, this definition of real numbers doesn't work! The
+reason is, there are cases where you write down two different numbers,
+and they refer to the same number.
+
+(I stole this example from a professor of mine, Peter Alfeld, who
+presumably stole it from someone else.\cite{pa-unique})
+
+\begin{example}[Issues with numerical representations of real numbers]
+  Consider the number $x = 0.9999999\dots$. We can multiply by
+  $10$. To do so, we just move everything one digit to the left.
+  
+  \begin{rclmath}
+      x & = & 0.99999\dots \\
+    10x & = & 9.99999\dots \\
+  \end{rclmath}
+
+  Well, we can take $9x = 10x - x$, and get this
+
+  \begin{rclmath}
+    10x & = & 9.99999\dots \\
+      x & = & 0.99999\dots \\
+     9x & = & 9 \\
+  \end{rclmath}
+
+  We get this because every single digit to the right of the decimal
+  point cancels. We can take $x = \frac{9x}{9}$ and get 
+
+  \begin{rclmath}
+     9x & = & 9 \\
+      x & = & 1 \\
+  \end{rclmath}
+
+  This is a silly example, and doesn't constitute a ``proof''. However,
+  it should give you a glimpse at why numerical representations of real
+  numbers are problematic.
+\end{example}
+
+Here's another example, which I stole from LeRoy Eide (he showed me
+this in person).
+
+\begin{example}[Issues with numerical representations of integers]
+  Take a number that begins with an endless string of $9$s to the
+  left.
+
+  \begin{displaymath}
+    x = \dots99994
+  \end{displaymath}
+
+  Let's take $x + 6$. 
+
+  \begin{displaymath}
+    \begin{tabu}{rr}
+        & \dots99994 \\
+      + & 6 \\
+      \tabucline \\
+      = & 0 \\
+    \end{tabu}
+  \end{displaymath}
+
+  Try it! You add the $6$ to the $4$, and get $10$. Fair enough, put
+  $0$ and carry the $1$
+
+  \tabulinesep=0ex
+  \begin{displaymath}
+    \begin{tabu}{rr}
+        & \text{1\hspace{2mm}}  \\
+        & \dots99994 \\
+      + & 6 \\
+      \tabucline \\
+      = & 00 \\
+    \end{tabu}
+  \end{displaymath}
+
+  Let's try it again
+
+  \begin{displaymath}
+    \begin{tabu}{rr}
+        & \text{11\hspace{2mm}}  \\
+        & \dots99994 \\
+      + & 6 \\
+      \tabucline \\
+      = & 000 \\
+    \end{tabu}
+  \end{displaymath}
+
+  Continue this process...
+
+  \begin{displaymath}
+    \begin{tabu}{rr}
+        & \text{\dots 1111\hspace{2mm}}  \\
+        & \dots99994 \\
+      + & 6 \\
+      \tabucline \\
+      = & \dots 00000 \\
+    \end{tabu}
+  \end{displaymath}
+
+  Therefore, we conclude that $\dots999994 + 6 = 0$, and therefore
+  that $\dots99994 = -6$.
+\end{example}
+
+Note, we do use infinite carry all the time. For instance, it's why
+
+\begin{displaymath}
+  \frac{2}{3} + \frac{1}{3} = 0.666\dots + 0.333\dots = 0.999\dots = 1
+\end{displaymath}
+
+Infinite carry actually follows nicely from something called
+``mathematical induction''. I'll explain induction in a later chapter.
+
+\begin{example}(More insanity with numbers)
+  We can take this a step further, and combine the two cases.
+
+  Let's look at $x = \dots99994$, and examine what happens when we
+  take $\frac{x}{100}$.
+
+  \begin{displaymath}
+    \frac{x}{100} = \dots999.94
+  \end{displaymath}
+
+  Let's look at $\frac{x}{10}$
+
+  \begin{displaymath}
+    \frac{x}{10} = \dots999.4
+  \end{displaymath}
+
+  Well, remember $\frac{x}{10} = \frac{10x}{100}$. Let's let
+  $y = \frac{x}{100}$. Therefore, $10y = \frac{x}{10}$. Let's do what
+  we did before, and take $10y - y$
+
+  \begin{displaymath}
+    \begin{tabu}{rr}
+        & \dots999.4\text{\hspace{2mm}} \\
+      - & \dots999.94 \\
+      \tabucline \\
+      = & -0.54 \\
+      = & -\frac{54}{100} \\
+    \end{tabu}
+  \end{displaymath}
+
+  Now we have that $9y = -\frac{54}{100}$. Therefore, $y =
+  -\frac{6}{100} = -\frac{3}{50}$. However, we had that $y =
+  \frac{x}{10}$, and therefore $10y = x$. Thus, we have
+
+  \begin{displaymath}
+    x = -\frac{3}{5} = -0.6
+  \end{displaymath}
+
+  Remember, before, we proved $x = -6$.
+\end{example}
+
+The problem here is that \xtb{numerical representations of numbers are
+  not unique}. That sounds like a contradiction, but it really isn't.
+It turns out, and we might prove this later, that you can tweak the
+definition to make decimal representations unique. Basically, we
+assert that the number can't begin or end with an infinite string of
+$9$s (in base $10$).
+
+\begin{ExerciseList}
+  \Exercise{In base $8$ (octal), can you guess what we have to do to
+    make numerical representations unique? What about base $2$
+    (binary)? Or base $3$ (ternary)? Or base $15$ (hexadecimal)?}
+  \Answer{I'll split this up.
+
+    \begin{description}
+    \item[Octal] In base $8$, we exclude numbers beginning or ending
+      with an infinite string of $7$s.
+    \item[Binary] In base $2$, we exclude numbers beginning or ending
+      with an infinite string of $1$s.
+    \item[Ternary] In base $3$, we exclude numbers beginning or ending
+      with an infinite string of $2$s.
+    \item[Hexadecimal] In base $16$, we exclude numbers beginning or ending
+      with an infinite string of $15$s.
+    \end{description}
+  }
+
+  \Exercise{More generally, in base $n$ notation, how do we ensure
+    that every number we write refers to a unique number?}
+  \Answer{In base $n$, we exclude numbers beginning or ending with an
+    infinite string of $n-1$s.}
+\end{ExerciseList}
+
+\section{Unions and Intersections}
+\section{Differences}
+\section{De Morgan's Laws}
