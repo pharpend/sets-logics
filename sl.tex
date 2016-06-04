@@ -5,6 +5,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage[date=iso8601,urldate=iso8601]{biblatex}
+\usepackage{centernot}
 \usepackage{color}
 \usepackage{datetime}
 \usepackage[answerdelayed]{exercise}
@@ -13,9 +14,9 @@
 \usepackage{tabu}
 
 \usepackage[T1]{fontenc}
-% \usepackage{newtxtext}
+\usepackage{newtxtext}
 \usepackage[scaled=0.85]{FiraSans}
-\usepackage{beramono}
+% \usepackage{beramono}
 \usepackage{newtxsf}
 % \usepackage{newtxmath}
 \renewcommand*{\familydefault}{\sfdefault}
@@ -68,7 +69,7 @@
 }
 
 \newcommand{\monospace}[1]{{\footnotesize \texttt{#1}}}
-\newcommand{\btrurl}[1]{{\tiny \url{#1}}}
+\newcommand{\btrurl}[1]{{\footnotesize \url{#1}}}
 \newcommand{\barelink}[1]{\monospace{<}\btrurl{#1}\monospace{>}}
 \newcommand{\link}[2]{#1 \barelink{#2}}
 \newcommand{\mdlink}[2]{\href{#2}{#1}}
@@ -85,6 +86,8 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
+% Note that \emptyset and \varnothing are the same in newtxsf. That's
+% not true in most cases
 \newcommand{\nil}{\varnothing}
 \newcommand{\mset}[1]{\braces{\, #1 \,}}
 \newcommand{\scomp}[2]{\mset{ #1 \, : \, #2 }}
