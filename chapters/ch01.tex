@@ -28,8 +28,7 @@ sets are the same
 
 There's a set with no elements, called the ``null set'', or the
 ``empty set'', or a variety of other names. It's usually denoted
-$\emptyset$, $\varnothing$, $\phi$, or some variant of that
-symbol. I'm going to use $\nil$.
+$\emptyset$, $\phi$, or some variant thereof. I'm going to use $\nil$.
 
 First of all, if we have a set $A$ and an object $x$, and $x$ is an
 element of $A$, we'll write $x \in A$. Note: I've have an old textbook
@@ -48,7 +47,7 @@ $\mset{1,2,3,4}$. We have
   1 \in \mset{1,2,3,4}
 \end{displaymath}
 
-but 
+but
 
 \begin{displaymath}
   5 \notin \mset{1,2,3,4}
@@ -80,7 +79,7 @@ Before we go much further, I want to introduce the notion of a ``set
 comprehension'', or ``set builder notation''. The basic format is this:
 
 \begin{displaymath}
-  \scomp{\text{What each element looks like}}{\text{Conditions about the element}}
+  \scomp{\text{\xtb{What each element looks like}}}{\text{\xtb{Conditions}}}
 \end{displaymath}
 
 The ``conditions'' are just things that have to hold true about the
@@ -205,7 +204,7 @@ presumably stole it from someone else.\cite{pa-unique})
 \begin{example}[Issues with numerical representations of real numbers]
   Consider the number $x = 0.9999999\dots$. We can multiply by
   $10$. To do so, we just move everything one digit to the left.
-  
+
   \begin{rclmath}
       x & = & 0.99999\dots \\
     10x & = & 9.99999\dots \\
@@ -220,7 +219,7 @@ presumably stole it from someone else.\cite{pa-unique})
   \end{rclmath}
 
   We get this because every single digit to the right of the decimal
-  point cancels. We can take $x = \frac{9x}{9}$ and get 
+  point cancels. We can take $x = \frac{9x}{9}$ and get
 
   \begin{rclmath}
      9x & = & 9 \\
@@ -243,7 +242,7 @@ this in person).
     x = \dots99994
   \end{displaymath}
 
-  Let's take $x + 6$. 
+  Let's take $x + 6$.
 
   \begin{displaymath}
     \begin{tabu}{rr}
@@ -260,7 +259,7 @@ this in person).
   \tabulinesep=0ex
   \begin{displaymath}
     \begin{tabu}{rr}
-        & \text{1\hspace{2mm}}  \\
+        & \text{1\hspace{2.1mm}}  \\
         & \dots99994 \\
       + & 6 \\
       \tabucline \\
@@ -272,7 +271,7 @@ this in person).
 
   \begin{displaymath}
     \begin{tabu}{rr}
-        & \text{11\hspace{2mm}}  \\
+        & \text{1\hspace{0.9mm}1\hspace{2.1mm}}  \\
         & \dots99994 \\
       + & 6 \\
       \tabucline \\
@@ -284,7 +283,7 @@ this in person).
 
   \begin{displaymath}
     \begin{tabu}{rr}
-        & \text{\dots 1111\hspace{2mm}}  \\
+        & \text{\dots 1\hspace{0.9mm}1\hspace{0.9mm}1\hspace{0.9mm}1\hspace{2.1mm}}  \\
         & \dots99994 \\
       + & 6 \\
       \tabucline \\
