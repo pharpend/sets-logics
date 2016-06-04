@@ -1,0 +1,66 @@
+\documentclass[12pt,oneside,ebook]{memoir}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{tabu}
+
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\renewcommand*{\familydefault}{\sfdefault}
+
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+
+\tabulinesep=1ex
+\chapterstyle{bianchi}
+\setlength{\parskip}{2ex}
+
+\newcommand{\monospace}{\texttt}
+\newcommand{\barelink}[1]{\monospace{<}\url{#1}\monospace{>}}
+\newcommand{\link}[2]{#1 \barelink{#2}}
+\newcommand{\mdlink}[2]{\href{#2}{#1}}
+\newcommand{\anauthor}[2]{#1 \monospace{<{#2}>}}
+\newcommand{\xtb}{\textbf}
+
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\braces}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\magnitude}{\norm}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\nil}{\varnothing}
+\newcommand{\mset}[1]{\braces{\, #1 \,}}
+\newcommand{\scomp}[2]{\mset{ #1 \, : \, #2 }}
+
+\newenvironment{alignmath}[1]
+  {\begin{displaymath}\begin{array}{#1}}
+  {\end{array}\end{displaymath}}
+\newenvironment{rclmath}
+  {\begin{alignmath}{rcl}}
+  {\end{alignmath}}
+
+\newcommand{\answergraph}[1]{\includegraphics[width=0.8\textwidth]{#1}}
+
+\begin{document}
+\title{Sets and Logics}
+\author{\anauthor{Peter Harpending}{peter.harpending@utah.edu}}
+\maketitle
+
+\newpage
+{
+  \noindent\footnotesize
+  This work is licensed under the Creative Commons Attribution 4.0
+  International License. To view a copy of this license, visit
+  \barelink{http://creativecommons.org/licenses/by/4.0/}.
+}
+\tableofcontents
+
+\input{chapters/ch01.tex}
+\end{document}

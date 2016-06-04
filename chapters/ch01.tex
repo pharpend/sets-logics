@@ -1,0 +1,96 @@
+\chapter{Sets}
+
+Sets are one of the most basic mathematical tools. The purpose of this
+chapter is to define sets, and do basic reasoning about them. Spoiler:
+it will later turn out that much of what we do in this chapter is
+actually wrong, and can lead to some contradictions.\footnote{If
+  you're really impatient, and can't wait for another chapter, you can
+  read the \link{Wikipedia page on Russell's
+    paradox}{https://en.wikipedia.org/wiki/Russell\%27s_paradox}}
+
+Sets are collections of objects. The easiest way to denote sets is to
+list their elements between curly braces: $\braces{}$.
+
+\begin{displaymath}
+  \mset{1,2,3,4}
+\end{displaymath}
+
+There is no notion of duplication or order, so all of the following
+sets are the same
+
+\begin{tabu}to \linewidth {rp{5.5cm}}
+  $\mset{1,2,3,4}$         & \\
+  $\mset{1,1,2,2,3,3,4,4}$ & (Each element is duplicated.) \\
+  $\mset{2,1,4,3,4,4,1}$   & (The order is different, and some of the elements are duplicated.)
+\end{tabu}
+
+There's a set with no elements, called the ``null set'', or the
+``empty set'', or a variety of other names. It's usually denoted
+$\emptyset$, $\varnothing$, $\phi$, or some variant of that
+symbol. I'm going to use $\nil$.
+
+
+First of all, if we have a set $A$ and an object $x$, and $x$ is an
+element of $A$, we'll write $x \in A$. Note: I've have an old textbook
+that uses the Greek letter epsilon ($\epsilon$) in place of $\in$. The
+$\in$ symbol kind of looks like an `E', which you can mentally
+associate with ``element''. The symbol $\in$ can be read as ``is an
+element of''. If some potential element $y$ is \xtb{not} in $A$, then
+we'll write $y \notin A$.\footnote{As a general rule, if you have some
+  symbol that indicates that something is true, crossing out the
+  symbol indicates that thing is false.}
+
+Continuing with the above example, we have the set
+$\mset{1,2,3,4}$. We have
+
+\begin{displaymath}
+  1 \in \mset{1,2,3,4}
+\end{displaymath}
+
+but 
+
+\begin{displaymath}
+  5 \notin \mset{1,2,3,4}
+\end{displaymath}
+
+We can have sets that have infinitely many elements. For instance, the
+``natural numbers'', usually denoted with $\N$, are
+infinite.\footnote{Conventions differ on whether or not $\N$ includes
+  $0$. It doesn't matter all that much, especially as far as this book
+  is concerned.} These are positive whole numbers (i.e. not fractions
+or decimals).
+
+\begin{displaymath}
+  \N = \mset{1,2,3,4,\dots}
+\end{displaymath}
+
+The ``integers'' are any whole numbers, which include $0$ and negative
+numbers. The integers are usually denoted with $\Z$. The $\Z$ stands
+for ``Zahlen'', which is German for ``numbers''.\footnote{I heard this
+  from a professor once. If it's wrong, blame him.}
+
+\begin{displaymath}
+  \Z = \mset{\dots, -3, -2, -1, 0, 1, 2, 3, \dots}
+\end{displaymath}
+
+Before we go much further, I want to introduce the notion of a ``set
+comprehension'', or ``set builder notation''.
+
+\begin{displaymath}
+  \scomp{x \in \N}{x < 5} = \mset{1,2,3,4}
+\end{displaymath}
+\begin{displaymath}
+  \scomp{x \in \Z}{x < 5} = \mset{\dots,-3,-2,-1,0,1,2,3,4}
+\end{displaymath}
+
+Each set comprehension should be read in two parts: the part before
+the colon, and the part after the colon.
+
+\begin{itemize}
+\item $x \in \N$ means that we are choosing\footnote{Yes, we'll get to
+    the axiom of choice later. Calm down.} elements of $\N$, and we're
+  calling the element $x$.
+\item $x < 5$ means that we are choosing all elements of $\N$ which
+  are less than $5$. In the part before the colon, we are choosing one
+  such element as an example, and calling it $x$.
+\end{itemize}
