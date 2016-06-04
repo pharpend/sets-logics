@@ -29,7 +29,6 @@ There's a set with no elements, called the ``null set'', or the
 $\emptyset$, $\varnothing$, $\phi$, or some variant of that
 symbol. I'm going to use $\nil$.
 
-
 First of all, if we have a set $A$ and an object $x$, and $x$ is an
 element of $A$, we'll write $x \in A$. Note: I've have an old textbook
 that uses the Greek letter epsilon ($\epsilon$) in place of $\in$. The
@@ -74,10 +73,22 @@ for ``Zahlen'', which is German for ``numbers''.\footnote{I heard this
 \end{displaymath}
 
 Before we go much further, I want to introduce the notion of a ``set
-comprehension'', or ``set builder notation''.
+comprehension'', or ``set builder notation''. The basic format is this:
+
+\begin{displaymath}
+  \scomp{\text{\rmfamily What each element looks like}}{\text{\rmfamily Conditions}}
+\end{displaymath}
+
+The ``conditions'' are just things that have to hold true about the
+element.
+
+Here are some examples:
 
 \begin{displaymath}
   \scomp{x \in \N}{x < 5} = \mset{1,2,3,4}
+\end{displaymath}
+\begin{displaymath}
+  \scomp{2x \in \N}{x < 5} = \mset{2,4,6,8}
 \end{displaymath}
 \begin{displaymath}
   \scomp{x \in \Z}{x < 5} = \mset{\dots,-3,-2,-1,0,1,2,3,4}
@@ -94,3 +105,31 @@ the colon, and the part after the colon.
   are less than $5$. In the part before the colon, we are choosing one
   such element as an example, and calling it $x$.
 \end{itemize}
+
+Many programming languages have ``list comprehensions'', which are
+conceptually similar to set comprehensions. For instance, in Python,
+we can construct the equivalent of our sets from above like this:
+
+\begin{lstlisting}[language=Python]
+>>> [ x for x in range(1,5) ]
+[1, 2, 3, 4]
+>>> [ 2*x for x in range(1,5) ]
+[2, 4, 6, 8]
+\end{lstlisting}
+
+In Haskell, the syntax is a bit different, but:
+
+\begin{lstlisting}[language=Haskell]
+ghci> [ x | x <- [1..4] ]
+[1,2,3,4]
+ghci> [ 2*x | x <- [1..4] ]
+[2,4,6,8]
+\end{lstlisting}
+
+In Coq, the syntax is extremely different. Coq does not have an
+interactive evaluator (like Python's \monospace{python} or Haskell's
+GHCi). This is how you would go about defining
+
+\begin{lstlisting}[language=Haskell]
+Definition X : Set := { x : nat | x < 5 }.
+\end{lstlisting}
