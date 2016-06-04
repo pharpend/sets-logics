@@ -1,2 +1,11 @@
-all:
-	latexmk -pdf -xelatex ba.tex
+all: build clean
+
+build:
+	mkdir .build
+	cp -r sl.tex sl.bib chapters images .build
+	cd .build && \
+	  latexmk -pdf sl.tex && \
+	  cp sl.pdf ..
+
+clean:
+	rm -rf .build

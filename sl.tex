@@ -1,7 +1,8 @@
-\documentclass[12pt,oneside,ebook]{memoir}
+\documentclass[12pt,oneside,letterpaper]{memoir}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage[date=iso8601,urldate=iso8601]{biblatex}
 \usepackage{color}
 \usepackage{datetime}
@@ -10,9 +11,8 @@
 \usepackage{tabu}
 
 \usepackage[T1]{fontenc}
-\usepackage{newtxtext}
-\usepackage{newtxmath}
-\renewcommand*{\familydefault}{\sfdefault}
+% \usepackage{newtxtext}
+% \usepackage{newtxmath}
 
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
@@ -23,7 +23,7 @@
 \setlength{\parskip}{2ex}
 \yyyymmdddate
 \renewcommand*{\dateseparator}{-}
-\addbibresource{ba.bib}
+\addbibresource{sl.bib}
 
 \nocite{*}
 
@@ -95,13 +95,14 @@
 \author{\anauthor{Peter Harpending}{peter.harpending@utah.edu}}
 \maketitle
 
-\newpage
 {
   \noindent\footnotesize
   This work is licensed under the Creative Commons Attribution 4.0
   International License. To view a copy of this license, visit
   \barelink{http://creativecommons.org/licenses/by/4.0/}.
 }
+
+\newpage
 \tableofcontents
 
 \input{chapters/ch01.tex}

@@ -18,7 +18,7 @@ list their elements between curly braces: $\braces{}$.
 There is no notion of duplication or order, so all of the following
 sets are the same
 
-\begin{tabu}to \linewidth {rp{5.5cm}}
+\begin{tabu}{rp{8.5cm}}
   $\mset{1,2,3,4}$         & \\
   $\mset{1,1,2,2,3,3,4,4}$ & (Each element is duplicated.) \\
   $\mset{2,1,4,3,4,4,1}$   & (The order is different, and some of the elements are duplicated.)
@@ -31,13 +31,13 @@ symbol. I'm going to use $\nil$.
 
 First of all, if we have a set $A$ and an object $x$, and $x$ is an
 element of $A$, we'll write $x \in A$. Note: I've have an old textbook
-that uses the Greek letter epsilon ($\epsilon$) in place of $\in$. The
-$\in$ symbol kind of looks like an `E', which you can mentally
-associate with ``element''. The symbol $\in$ can be read as ``is an
-element of''. If some potential element $y$ is \xtb{not} in $A$, then
-we'll write $y \notin A$.\footnote{As a general rule, if you have some
-  symbol that indicates that something is true, crossing out the
-  symbol indicates that thing is false.}
+that uses the Greek letter epsilon ($\epsilon$ or $\varepsilon$) in
+place of $\in$. The $\in$ symbol kind of looks like an `E', which you
+can mentally associate with ``element''. The symbol $\in$ can be read
+as ``is an element of''. If some potential element $y$ is \xtb{not} in
+$A$, then we'll write $y \notin A$.\footnote{As a general rule, if you
+  have some symbol that indicates that something is true, crossing out
+  the symbol indicates that thing is false.}
 
 Continuing with the above example, we have the set
 $\mset{1,2,3,4}$. We have
@@ -71,6 +71,8 @@ for ``Zahlen'', which is German for ``numbers''.\footnote{I heard this
 \begin{displaymath}
   \Z = \mset{\dots, -3, -2, -1, 0, 1, 2, 3, \dots}
 \end{displaymath}
+
+\section{Set comprehensions}
 
 Before we go much further, I want to introduce the notion of a ``set
 comprehension'', or ``set builder notation''. The basic format is this:
@@ -106,30 +108,60 @@ the colon, and the part after the colon.
   such element as an example, and calling it $x$.
 \end{itemize}
 
+\subsection{Trying these on your computer}
+
 Many programming languages have ``list comprehensions'', which are
-conceptually similar to set comprehensions. For instance, in Python,
+conceptually similar to set comprehensions. For instance, in Haskell,
 we can construct the equivalent of our sets from above like this:
 
-\begin{lstlisting}[language=Python]
->>> [ x for x in range(1,5) ]
-[1, 2, 3, 4]
->>> [ 2*x for x in range(1,5) ]
-[2, 4, 6, 8]
-\end{lstlisting}
-
-In Haskell, the syntax is a bit different, but:
-
-\begin{lstlisting}[language=Haskell]
+\begin{lstlisting}[language=Haskell,caption={The sets from above, in Haskell}]
 ghci> [ x | x <- [1..4] ]
 [1,2,3,4]
 ghci> [ 2*x | x <- [1..4] ]
 [2,4,6,8]
 \end{lstlisting}
 
-In Coq, the syntax is extremely different. Coq does not have an
-interactive evaluator (like Python's \monospace{python} or Haskell's
-GHCi). This is how you would go about defining
+In Python, the syntax is a bit different, but:
 
-\begin{lstlisting}[language=Haskell]
-Definition X : Set := { x : nat | x < 5 }.
+\begin{lstlisting}[language=Python,caption={The same thing in Python}]
+>>> [ x for x in range(1,5) ]
+[1, 2, 3, 4]
+>>> [ 2*x for x in range(1,5) ]
+[2, 4, 6, 8]
+\end{lstlisting}
+
+You probably already have Python installed on your system. Open a
+terminal, and run the command \monospace{python} (hit Enter after
+typing ``python''). If not, try following the instructions here:
+\barelink{https://wiki.python.org/moin/BeginnersGuide/Download}.
+
+You probably do \xtb{not} have Haskell installed on your system,
+unless you installed it on purpose. You can find documentation on how
+to install Haskell here: \barelink{http://haskellstack.org/}.
+
+\subsubsection{Lists v. Sets}
+
+Lists are different from sets, because, in a list, order and
+duplication matter. You can test this out in Haskell like this:
+
+\begin{lstlisting}[language=Haskell,caption={List equality in Haskell}]
+ghci> [1,2,3,4] == [1,2,3,4]
+True
+ghci> [1,2,3,4] == [4,3,2,1]
+False
+ghci> [1,2,3,4] == [1,2,3,1,3,3,1,4,2]
+False
+\end{lstlisting}
+
+Haskell actually has a type for sets, called \monospace{Set}. To turn
+a list into a set, you use the function \monospace{fromList}
+
+\begin{lstlisting}[language=Haskell,caption={Set equality in Haskell}]
+ghci> import Data.Set
+ghci> fromList [1,2,3,4] == fromList [1,2,3,4]
+True
+ghci> fromList [1,2,3,4] == fromList [4,3,2,1]
+True
+ghci> fromList [1,2,3,4] == fromList [1,4,3,1,2]
+True
 \end{lstlisting}
