@@ -1,0 +1,298 @@
+\chapter{Propositional Logic}
+\label{propositions}
+
+The goal of this chapter is to give you an idea of how to think
+mathematically. We introduce the notion of \term{propositions}, and
+then of \term{proofs}.
+
+\section{Propositions}
+
+Let's invent a proposition, and call it $p$. $p$ is semantically
+equivalent to a ``statement''. A ``proof of $p$'' is a proof that $p$
+is true. To say
+
+\begin{zz}
+  f \text{ is a proof of } p,
+\end{zz}
+
+we write
+
+\begin{zz}
+  f : p.
+\end{zz}
+
+\begin{remark}
+  Outside of certain circles, the $f : p$ notation is very
+  non-standard. Later in the book, it will become clear why we use it.
+
+  I often, when writing, use the $:$ symbol to be short for ``such
+  that''. Again, you'll see why all of this makes sense later.
+\end{remark}
+
+\begin{aside}
+  In mathematics, it's very common to see notation you think is
+  confusing, only to discover---often several years later---that the
+  notation makes perfect sense and is actually brilliant.
+\end{aside}
+
+The most basic proofs begin with \term{axioms}---also called
+\term{postulates}---and then prove \term{theorems}---also called
+\term{lemmas}. However, most proofs incorporate previously proved
+lemmas to create new lemmas. If we had to start from the most basic
+axioms every time we proved anything, nothing would ever get done.
+
+\begin{definition}
+  \label{def:axiom}
+  \label{def:postulate}
+  An \term{axiom} (or \term{postulate}) is a proposition that we
+  accept to be true without proof.
+\end{definition}
+
+\begin{remark}
+  \label{r:law}
+  In most contexts, the term ``law'' is ambiguous. Sometimes, it
+  refers to theorems, sometimes it refers to lemmas. I won't call
+  anything that I define a ``law''. However, I will call things
+  ``laws'' if some vocabulary term is commonly known as ``the law of
+  X'' or ``X's law''. (See, for instance, \cref{ax:modus-ponens}).
+\end{remark}
+
+\begin{definition}
+  \label{def:theorem}
+  A \term{theorem} (or \term{lemma}) is a proposition that can be
+  proven from other axioms or theorems.
+\end{definition}
+
+\subsection{Implication}
+
+The first thing in logic is the notion of ``implication''. We write
+$a \implies b$ to say ``$a$ implies $b$''. This means ``if $a$ is
+true, then $b$ is also true'', or simply ``if $a$ then $b$''.
+
+\begin{axiom}[Law of Modus Ponens]
+  \label{ax:modus-ponens}
+  If $a$ implies $b$, and we know $a$ is true, then we can conclude
+  $b$.
+
+  In other words, ``$a$ implies $b$. $a$, therefore $b$''.
+\end{axiom}
+
+Usually, three dots arranged in a triangle are used to write
+``therefore'': $\therefore$.  The statement in \cref{ax:modus-ponens}
+can therefore be rewritten as:
+
+\begin{alignmath}{r}
+  a \implies b.\; a,\, \therefore b
+\end{alignmath}
+
+Sometimes, it's semantically convenient to write $b \impliedby a$,
+which just means ``$b$ is implied by $a$''. It's the same as
+$a \implies b$. This is also sometimes said ``$b$ if $a$''. This
+means, ``assuming $a$, we can prove $b$''.
+
+We'll also often write $a \iff b$ which means that $a$ implies $b$,
+\xtb{and} $b$ implies $a$. Usually, you'll hear this pronounced ``$a$
+if and only if $b$''. In a minute, we'll get to why people say ``if
+and only if'', as opposed to something like ``implies and is implied
+by''.
+
+\begin{remark}
+  Given two propositions $a$ and $b$, $a \implies b$ is actually a
+  proposition. The proposition is, $a$ implies $b$.
+\end{remark}
+
+Here are some more or less ``obvious'' properties of logic
+
+\begin{axiom}[Reflexive property]
+  For all propositions $a$, $a \implies a$.
+\end{axiom}
+
+\begin{axiom}[Transitive property]
+  For all propositions $a$, $b$, and $c$, if $a \implies b$, and $b
+  \implies c$, then $a \implies c$
+\end{axiom}
+
+\subsection{Negation}
+
+Quite often, we'll need to declare that something is false. To say
+that ``$a$ is false'', you write $\lnot a$, pronounced ``not $a$''.
+
+\begin{axiom}[Double negation]
+  The proposition $\lnot(\lnot a)$ is equivalent to $a$.
+\end{axiom}
+
+\begin{remark}
+  In many (indeed, most) logics, double negation is not accepted as an
+  axiom. Many important theorems rely on double negation.
+
+  For instance, the Intermediate Value Theorem in Calculus states
+  that, given two points on $a$ and $b$ that are values of a
+  ``continuous'' function (a function whose graph does not have any
+  gaps or poles), the function touches every single point between $a$
+  and $b$. Every known proof of the Intermediate Value Theorem relies
+  on double negation. More specifically, it relies on the
+  contrapositive, which we'll define in a second.
+\end{remark}
+
+\subsection{The contrapositive}
+
+Many logics define two values, $\top$, and $\bot$, called ``top'' and
+``bottom'', respectively. $\top$ is always provable, and $\bot$ is
+never provable. In those logics, the proposition $\lnot a$ is
+equivalent to $a \implies \bot$. If you can prove $a$ implies
+something that is never provable, you can conclude that $a$ is false.
+
+This is the common logical technique of \term{reductio ad absurdum},
+or \term{proof by contradiction}. ``Reductio ad absurdum'' is Latin
+for ``reduction to the absurd''.
+
+\begin{definition}
+  Given the proposition $a \implies b$, the proposition
+  $\lnot b \implies \lnot a$ is called the \term{contrapositive}.
+\end{definition}
+
+\begin{theorem}[Reductio ad absurdum]
+  \label{reductio-ad-absurdum}
+  Every proposition of the form $a \implies b$ is logically equivalent
+  to its contrapositive.
+\end{theorem}
+
+The fact that a proposition is logically equivalent to its
+contrapositive is not at all obvious. Let's go through some examples.
+
+\begin{example}
+  If someone is decapitated, then they are dead (at least within a few
+  seconds). Therefore,
+
+  \begin{zz}
+    \text{Decapitated} \implies \text{Dead}
+  \end{zz}
+
+  \answergraph{images/alas-poor-yorick.png}
+
+  Therefore, if someone is alive, you can conclude that they have not
+  been decapitated. Thus,
+
+  \begin{zz}
+    \text{not Dead} \implies \text{not Decapitated}
+  \end{zz}
+
+  This is the contrapositive.
+\end{example}
+
+We will circle back to proving the equivalence between a proposition
+and its contrapositive later on. To do this, we need to know what
+``equivalence'' is. The next section deals with defining equivalence.
+
+\section{Equivalence}
+
+What exactly does it mean for two propositions to be equivalent? What
+does it mean for two numbers to be equivalent? What does it mean for
+two shapes to be equivalent?
+
+You are probably tempted to say ``if $p = q$, then $p$ and $q$ are
+equivalent''! Problem solved, right?
+
+Well\dots not really. Think about this: the proposition $p \implies q$
+is equivalent to $\lnot q \implies \lnot p$. They are clearly not the
+same proposition, but they are logically equivalent\dots
+
+How do we universally define equivalence? Think about it for a
+second. In fact, I'm going to insert a page break so you can think
+about this without cheating and reading the answer. Go for a walk, get
+a cup of coffee, whatever it is you do, and think about this\dots
+
+\newpage
+
+Alright, you're back! The answer that mathematicians use is to define
+what are called \term{equivalence relations}. What on earth is an
+equivalence relation? For that matter, what is a ``relation''?
+
+We're going to explain all of that, as well as define an equivalence
+relation for propositions.
+
+Strictly speaking, a ``relation'' is something that takes one or more
+objects, and uses them to form a proposition. In this case, we're
+going to be studying relations that take two objects, called ``binary
+relations''. (The word ``binary'' means ``of or relating to two'').
+
+\begin{definition}
+  A \term{binary relation} is something that takes exactly two
+  objects, and determines whether or not something is true about them.
+\end{definition}
+
+There are, in more advanced areas, relations that require more than
+two things. However, for now, when I say ``relation'', I mean
+``binary relation''.
+
+\begin{aside}
+  There are also \term{unary relations} which take only one object. I
+  don't think calling them ``relations'' makes a whole lot of sense,
+  because the term ``relation'' implies that you are comparing one
+  thing \xti{relative} to other things. If there are no other things
+  to compare, the term ``relation'' doesn't make any
+  sense. Nonetheless, people use the term all the time.
+\end{aside}
+
+You already know quite a few relations.
+
+\begin{enumerate}
+\item Given two numbers $a$ and $b$, $=$ is a relation. It takes two
+  numbers and decides if they are equal.
+\item The symbol $\le$ is also a relation over numbers. It takes two
+  numbers, and decides if the first is less than or equal to the
+  second.
+\item The symbol $\implies$ is also a relation. It takes two
+  propositions, and decides if the first implies the second.
+\end{enumerate}
+
+What is something we can say about $=$ that we can't say about $\le$?
+
+The answer is that $=$ is an ``equivalence relation''. Meaning that it
+satisfies the properties in the next definition
+
+\begin{definition}
+  An \term{equivalence relation} is a binary relation $\sim$ satisfying
+  these properties:
+
+  \begin{enumerate}
+  \item for all $a$, $a \sim a$ (reflexive property),
+  \item for all $a$ and $b$, $a \sim b$ implies $b \sim a$ (symmetric
+    property),
+  \item for all $a$, $b$ and $c$, $a \sim b$ and $b \sim c$ imply
+    $a \sim c$.
+  \end{enumerate}
+\end{definition}
+
+The standard equivalence relation is $=$. It has all of those
+properties.
+
+If you'll notice, $\le$ and $\implies$ have all of those properties,
+except symmetry.
+
+Is there a relation for propositions that has symmetry? (That is, an
+equivalence relation for propositions).
+
+Think about it for a minute. I'll give you another page break\dots
+
+\newpage
+
+Turns out, there is an equivalence relation! The relation is
+$\iff$. Think about it:
+
+\begin{enumerate}
+\item For all propositions $p$, $p \iff p$. (We had this as an axiom
+  earlier).
+\item For all propositions $p$ and $q$, $p \iff q$ implies $q \iff p$.
+\item For all propositions $p$, $q$ and $r$, $p \iff q$ and $q \iff r$
+  imply $p \iff r$. (This was another axiom earlier).
+\end{enumerate}
+
+Can you think of some other equivalence relations? Many of them are
+not at all obvious.
+
+\subsection{Contrapositive}
+
+Circling back to the contrapositive: I claimed a proposition of the
+form $a \implies b$ is equivalent to its contrapositive. Now that
+we've defined equivalence, we're much more equipped to prove this.

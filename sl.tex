@@ -1,4 +1,4 @@
-\documentclass[12pt,oneside,ebook]{memoir}
+\documentclass[12pt,oneside,letterpaper]{memoir}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -9,24 +9,21 @@
 \usepackage{color}
 \usepackage{datetime}
 \usepackage[answerdelayed]{exercise}
+% \usepackage[includehead=true,scale=0.85]{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{tabu}
+\usepackage{textcomp}
 
+\usepackage{beramono}
 \usepackage[T1]{fontenc}
-\usepackage{newtxtext}
-\usepackage[scaled=0.85]{FiraSans}
-% \usepackage{beramono}
-\usepackage{newtxsf}
-% \usepackage{newtxmath}
-\renewcommand*{\familydefault}{\sfdefault}
 
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 \usepackage{cleveref}
 
 \tabulinesep=1ex
-\chapterstyle{bianchi}
+\chapterstyle{thatcher}
 \setlength{\parskip}{2ex}
 \def\ExerciseListName{Exercise}
 \yyyymmdddate
@@ -56,7 +53,7 @@
   % morekeywords={*,...},            % if you want to add more keywords to the set
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                   % how far the line-numbers are from the code
-  numberstyle=\footnotesize\ttfamily,    % the style that is used for the line-numbers
+  numberstyle=\tiny\ttfamily,    % the style that is used for the line-numbers
   rulecolor=\color{mygray},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
   showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
@@ -68,14 +65,15 @@
   caption=\lstname ,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
-\newcommand{\monospace}[1]{{\footnotesize \texttt{#1}}}
+\newcommand{\monospace}[1]{{\footnotesize \path{#1}}}
 \newcommand{\btrurl}[1]{{\footnotesize \url{#1}}}
 \newcommand{\barelink}[1]{\monospace{<}\btrurl{#1}\monospace{>}}
 \newcommand{\link}[2]{#1 \barelink{#2}}
 \newcommand{\mdlink}[2]{\href{#2}{#1}}
-\newcommand{\anauthor}[2]{#1 \monospace{<{#2}>}}
 \newcommand{\xtb}{\textbf}
-
+\newcommand{\xti}{\emph}
+% Eventually, we might have an index
+\newcommand{\term}{\emph}
 \newcommand{\parens}[1]{\left( #1 \right)}
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\braces}[1]{\left\{ #1 \right\}}
@@ -93,36 +91,103 @@
 \newcommand{\scomp}[2]{\mset{ #1 \, : \, #2 }}
 
 \newenvironment{alignmath}[1]
-  {\begin{displaymath}\begin{array}{#1}}
-  {\end{array}\end{displaymath}}
+  {\begin{zz}\begin{array}{#1}}
+  {\end{array}\end{zz}}
+\newenvironment{rcl}
+  {\begin{eqnarray*}}
+  {\end{eqnarray*}}
 \newenvironment{rclmath}
-  {\begin{alignmath}{rcl}}
-  {\end{alignmath}}
+  {\begin{rcl}}
+  {\end{rcl}}
+\newenvironment{zz}
+  {\begin{equation*}}
+  {\end{equation*}}
 
 \newcommand{\answergraph}[1]{\includegraphics[width=0.8\textwidth]{#1}}
 
+\theoremstyle{plain}
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{definition}[axiom]{Definition}
+\newtheorem{theorem}[axiom]{Theorem}
+
 \theoremstyle{definition}
-\newtheorem{example}{Example}[section]
+\newtheorem{example}[axiom]{Example}
+\newtheorem{remark}[axiom]{Remark}
+\newtheorem{aside}[axiom]{Aside}
 
 \begin{document}
-\title{Sets and Logics}
-\author{\anauthor{Peter Harpending}{peter.harpending@utah.edu}}
+\title{Foundations of Pure Mathematics}
+\author{Peter Harpending {\footnotesize \texttt{<peter.harpending@utah.edu>}}}
 \maketitle
 
-This work is licensed under the Creative Commons Attribution 4.0
+\newpage
+
+The book is licensed under the Creative Commons Attribution 4.0
 International License. To view a copy of this license, visit
 \barelink{http://creativecommons.org/licenses/by/4.0/}.
 
-You can find the source for this book on GitHub
-\barelink{https://github.com/pharpend/sets-logics}.
+Computer code examples found in the book are licensed under a
+BSD-style license
+
+\noindent\hrulefill
+
+\begin{quote}
+  { \footnotesize Copyright \textcopyright\ 2016, Peter Harpending.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+
+    \begin{enumerate}
+    \item Redistributions of source code must retain the above
+      copyright notice, this list of conditions and the following
+      disclaimer.
+
+    \item Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+
+    \item Neither the name of the copyright holder nor the names of
+      its contributors may be used to endorse or promote products
+      derived from this software without specific prior written
+      permission.
+    \end{enumerate}
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+    CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS
+    BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+    TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+    ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
+    TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
+    THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+    SUCH DAMAGE.  }
+\end{quote}
+
+\noindent\hrulefill
 
 \newpage
 \tableofcontents
 
-\input{chapters/ch01.tex}
+\setcounter{chapter}{-1}
+\input{chapters/0.tex}
+
+\book{Basics}
+
+\input{chapters/1.tex}
+\input{chapters/2.tex}
 
 \chapter{Functions}
+  \section{Domain}
+  \section{Codomain}
+  \section{Range}
   \section{Recursion}
+  \section{Currying}
 
 \chapter{Proofs}
   \section{Propositions}
@@ -138,10 +203,6 @@ You can find the source for this book on GitHub
 \chapter{Fields}
 \chapter{Vector Spaces}
 
-\begin{appendices}
-  \chapter{Solutions to the exercises}
-  \shipoutAnswer
-\end{appendices}
 
 \printbibliography
 \end{document}

@@ -345,42 +345,12 @@ Infinite carry actually follows nicely from something called
   Remember, before, we proved $x = -6$.
 \end{example}
 
-\begin{example}[The problem with representations in numerical bases
-  other than $n = 10$]
-  I'm sure you've heard of ``binary'' numbers. In English, the prefix
-  ``bi'' means ``two'', so ``binary numbers'' are base $n = 2$.
-
-  Take the number $54321$, in normal notation. This is equal to
-
-  \begin{displaymath}
-    \begin{array}{ccccccccc}
-      1 \times 10^0 & + & 2 \times 10^1 & + & 3 \times 10^2 & + & 4 \times 10^3 & + & 5 \times 10^4 \\
-      1 & + & 20 & + & 300 & + & 4000 & + & 50000 \\
-    \end{array}
-  \end{displaymath}
-
-
-\end{example}
-
-The problem here is that \xtb{base $n$ representations of real numbers
-  are not unique}. That sounds like a contradiction, but it really
-isn't. It turns out, and we might prove this later, that you can tweak
-the rules of writing numbers down to make decimal representations
-unique. For decimal (base $10$) numbers, we assert that the number
+The problem here is that \xtb{decimal (base $10$) representations of
+  real numbers are not unique}. That sounds like a contradiction, but
+it really isn't. It turns out, and we might prove this later, that you
+can tweak the rules of writing numbers down to make decimal
+representations unique. For decimal numbers, we assert that the number
 can't begin or end with an infinite string of $9$s.
-
-\begin{ExerciseList}
-  \Exercise{In base $8$ (octal) notation, how do we ensure that every number
-    we write refers to a unique number?}
-  \Exercise{In base $2$ (binary) notation, how do we ensure that every number
-    we write refers to a unique number?}
-  \Exercise{In base $2$ notation, how do we ensure that every number
-    we write refers to a unique number?}
-  \Exercise{In base $n$ notation, how do we ensure that every number
-    we write refers to a unique number?}
-  \Answer{In base $n$, we exclude numbers beginning or ending with an
-    infinite string of $n-1$s.}
-\end{ExerciseList}
 
 \section{Unions and Intersections}
 \section{Differences}
