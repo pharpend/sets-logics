@@ -1,4 +1,4 @@
-\documentclass[12pt,oneside,letterpaper]{memoir}
+\documentclass[12pt,oneside,ebook]{memoir}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -9,12 +9,14 @@
 \usepackage{color}
 \usepackage{datetime}
 \usepackage[answerdelayed]{exercise}
-% \usepackage[includehead=true,scale=0.85]{geometry}
+\usepackage[includehead=true,scale=0.80]{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{tabu}
 \usepackage{textcomp}
 
+\usepackage{fouriernc}
+% \renewcommand*{\familydefault}{\sfdefault}
 \usepackage{beramono}
 \usepackage[T1]{fontenc}
 
@@ -113,6 +115,7 @@
 \newtheorem{axiom}{Axiom}[section]
 \newtheorem{definition}[axiom]{Definition}
 \newtheorem{theorem}[axiom]{Theorem}
+\newtheorem{lemma}[axiom]{Lemma}
 
 \theoremstyle{definition}
 \newtheorem{example}[axiom]{Example}

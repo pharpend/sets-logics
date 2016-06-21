@@ -104,10 +104,12 @@ by''.
 Here are some more or less ``obvious'' properties of logic
 
 \begin{axiom}[Reflexive property]
+  \label{ax:props-refl}
   For all propositions $a$, $a \implies a$.
 \end{axiom}
 
 \begin{axiom}[Transitive property]
+  \label{ax:props-trans}
   For all propositions $a$, $b$, and $c$, if $a \implies b$, and $b
   \implies c$, then $a \implies c$
 \end{axiom}
@@ -260,7 +262,7 @@ satisfies the properties in the next definition
   \item for all $a$ and $b$, $a \sim b$ implies $b \sim a$ (symmetric
     property),
   \item for all $a$, $b$ and $c$, $a \sim b$ and $b \sim c$ imply
-    $a \sim c$.
+    $a \sim c$ (transitive property).
   \end{enumerate}
 \end{definition}
 
@@ -280,19 +282,79 @@ Think about it for a minute. I'll give you another page break\dots
 Turns out, there is an equivalence relation! The relation is
 $\iff$. Think about it:
 
-\begin{enumerate}
-\item For all propositions $p$, $p \iff p$. (We had this as an axiom
-  earlier).
-\item For all propositions $p$ and $q$, $p \iff q$ implies $q \iff p$.
-\item For all propositions $p$, $q$ and $r$, $p \iff q$ and $q \iff r$
-  imply $p \iff r$. (This was another axiom earlier).
-\end{enumerate}
+\begin{description}
+\item[Reflexivity] For all propositions $p$, $p \iff
+  p$. (\Cref{ax:props-refl})
+\item[Symmetry] For all propositions $p$ and $q$, $p \iff q$ implies
+  $q \iff p$.
+\item[Transitivity] For all propositions $p$, $q$ and $r$, $p \iff q$
+  and $q \iff r$ imply $p \iff r$. (\Cref{ax:props-trans})
+\end{description}
 
 Can you think of some other equivalence relations? Many of them are
 not at all obvious.
+
+\begin{example}
+  Analog clocks and watches give the time in 12-hour format. However,
+  there are 24 hours in a day. When you say ``14:00 is the same as
+  2:00'', you're actually saying ``14 is congruent to 2, modulo
+  12''. The way we write this is with
+
+  \begin{zz}
+    14 \equiv 2 \mod 12
+  \end{zz}
+
+  What exactly is ``modulo''? Technically speaking, $n$ modulo $m$ is
+  the remainder of dividing $n$ by $m$. So, $14 / 12 = 1$ with a
+  remainder of $2$. We'll get to this more in-depth when we discuss
+  arithmetic.
+
+  Here's a fun thing, you can add two times together to get a new
+  time. For instance, let's say you go into work at 9:00 in the
+  morning, and stay for 8 hours. $9 + 8 = 17$. However,
+  $17 \equiv 5 \mod 12$, which means you stay until 5 PM. You've been
+  secretly using this equivalence relation your entire life.
+
+  We'll learn later, in the Algebra section, that integers modulo 12
+  (i.e. numbers on a clock) form a \term{module} of the integers
+  (hence the term ``modulo''). Meaning this:
+
+  \begin{enumerate}
+  \item Given two times, $a$ and $b$ in the module, $a + b$ is also in
+    the module.
+  \item Given an integer\footnote{An integer is a positive, negative
+      or zero whole number.} $z$, and a time $t$, $zt$ is also in the
+    subgroup.\footnote{The notation $zt$ just means ``$z$ times
+      $t$''.}
+  \end{enumerate}
+
+  There are a number of other properties that have to hold, but those
+  are the properties unique to modules.
+
+  Can you think of some other modules?
+
+  I'll give you a hint: even numbers are also a module.
+\end{example}
 
 \subsection{Contrapositive}
 
 Circling back to the contrapositive: I claimed a proposition of the
 form $a \implies b$ is equivalent to its contrapositive. Now that
 we've defined equivalence, we're much more equipped to prove this.
+
+Two propositions $p$ and $q$ are equivalent if\footnote{Actually, it's
+  ``if and only if'', because two propositions $p$ and $q$ being
+  ``equivalent'' means $p \iff q$. However, it's conventional to say
+  ``if'' when parroting a definition.} $p \iff q$. Therefore,
+
+\begin{lemma}
+  \label{thm:contrapositive}
+  $(a \implies b) \iff (\lnot b \implies \lnot a)$.
+\end{lemma}
+
+\begin{proof}
+  The most common way to prove an ``if and only if'' statement is to
+  separately prove the $\implies$ branch, and the $\impliedby$ branch.
+
+  \dots
+\end{proof}
