@@ -2,27 +2,23 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage[date=iso8601,urldate=iso8601]{biblatex}
+\usepackage{appendix}
+\usepackage[backend=bibtex,date=iso8601,urldate=iso8601]{biblatex}
 \usepackage{centernot}
 \usepackage{color}
 \usepackage{datetime}
+\usepackage{enumitem}
 \usepackage[answerdelayed]{exercise}
-% \usepackage[includehead=true,scale=0.80]{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{tabu}
 \usepackage{textcomp}
-
-% \usepackage{fouriernc}
-\usepackage{beramono}
-\usepackage[T1]{fontenc}
 
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 \usepackage{cleveref}
 
 \tabulinesep=1ex
-\chapterstyle{thatcher}
 \setlength{\parskip}{2ex}
 \def\ExerciseListName{Exercise}
 \yyyymmdddate
@@ -36,9 +32,9 @@
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 \lstset{ %
   % backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-  basicstyle=\footnotesize\ttfamily,     % the size of the fonts that are used for the code
+  basicstyle=\tiny\ttfamily,     % the size of the fonts that are used for the code
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-  breaklines=false,                 % sets automatic line breaking
+  breaklines=true,                 % sets automatic line breaking
   captionpos=b,                    % sets the caption-position to bottom
   commentstyle=\color{mygreen},    % comment style
   deletekeywords={...},            % if you want to delete keywords from the given language
@@ -53,6 +49,7 @@
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                   % how far the line-numbers are from the code
   numberstyle=\tiny\ttfamily,    % the style that is used for the line-numbers
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
   rulecolor=\color{mygray},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
   showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
@@ -125,89 +122,22 @@
 \author{Peter Harpending {\footnotesize \texttt{<peter.harpending@utah.edu>}}}
 \maketitle
 
-\newpage
+\noindent\hrulefill
 
 The book is licensed under the Creative Commons Attribution 4.0
 International License. To view a copy of this license, visit
 \barelink{http://creativecommons.org/licenses/by/4.0/}.
 
-Computer code examples found in the book are licensed under a
-BSD-style license
-
 \noindent\hrulefill
 
-\begin{quote}
-  { \footnotesize Copyright \textcopyright\ 2016, Peter Harpending.
-
-    Redistribution and use in source and binary forms, with or without
-    modification, are permitted provided that the following conditions
-    are met:
-
-    \begin{enumerate}
-    \item Redistributions of source code must retain the above
-      copyright notice, this list of conditions and the following
-      disclaimer.
-
-    \item Redistributions in binary form must reproduce the above
-      copyright notice, this list of conditions and the following
-      disclaimer in the documentation and/or other materials provided
-      with the distribution.
-
-    \item Neither the name of the copyright holder nor the names of
-      its contributors may be used to endorse or promote products
-      derived from this software without specific prior written
-      permission.
-    \end{enumerate}
-
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
-    CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
-    INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS
-    BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
-    TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-    ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
-    TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-    THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-    SUCH DAMAGE.  }
-\end{quote}
-
-\noindent\hrulefill
-
-\newpage
 \tableofcontents
 
-\setcounter{chapter}{-1}
-\input{chapters/0.tex}
-
-\book{Basics}
-
 \input{chapters/1.tex}
-\input{chapters/2.tex}
 
-\chapter{Functions}
-  \section{Domain}
-  \section{Codomain}
-  \section{Range}
-  \section{Recursion}
-  \section{Currying}
-
-\chapter{Proofs}
-  \section{Propositions}
-  \section{Proofs}
-
-\chapter{Rigorous set theory}
-  \section{Functions}
-  \section{Types}
-  \section{Curry-Howard correspondence}
-
-\chapter{Groups}
-\chapter{Rings}
-\chapter{Fields}
-\chapter{Vector Spaces}
-
+\begin{appendices}
+  \input{chapters/a.tex}
+  \input{chapters/b.tex}
+\end{appendices}
 
 \printbibliography
 \end{document}
