@@ -4,7 +4,7 @@ print: setup build-print clean
 
 setup:
 	mkdir -p .build
-	cp -rv sl*.tex chapters files images .build
+	cp -rv sl.bib sl*.tex chapters files images .build
 
 
 build-ebook:
