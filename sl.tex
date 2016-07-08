@@ -19,7 +19,6 @@
 \usepackage{cleveref}
 
 \tabulinesep=1ex
-\setlength{\parskip}{2ex}
 \def\ExerciseListName{Exercise}
 \yyyymmdddate
 \renewcommand*{\dateseparator}{-}
@@ -85,10 +84,13 @@
 \newcommand{\nil}{\varnothing}
 \newcommand{\mset}[1]{\braces{\, #1 \,}}
 \newcommand{\scomp}[2]{\mset{ #1 \, : \, #2 }}
+\newcommand{\ctext}[1]{$$\text{#1}$$}
+\newcommand{\tand}{\text{ and }}
+\newcommand{\tor}{\text{ or }}
 
-\renewcommand{\implies}{\Rightarrow}
-\renewcommand{\impliedby}{\Leftarrow}
-\renewcommand{\iff}{\Leftrightarrow}
+\renewcommand{\implies}{\to}
+\renewcommand{\impliedby}{\leftarrow}
+\renewcommand{\iff}{\leftrightarrow}
 
 \newenvironment{alignmath}[1]
   {\begin{zz}\begin{tabu}{#1}}

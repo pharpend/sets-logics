@@ -54,6 +54,89 @@ questions 6 and 7. The answer to question 8 is ``no''.
 \section{Propositions \& Proofs}
 \label{s:props-proofs}
 
+Thomas Goller wrote an excellent series of lecture notes for the
+discrete math course taught at the University of
+Utah. \cite{goller-discrete} In particular, his explanation of ``real
+mathematics'' is spot-on. He references some concepts you've likely
+never heard of, so I'll paraphrase it here.
+
+Most of ``real mathematics'' is not about computing heinous sums,
+doing long division of large numbers, or solving confusing word
+problems, all of which you likely did in grade school. It's mostly
+about taking mathematical facts, and using them to prove more
+interesting mathematical facts.
+
+There are mathematicians who do focus on modeling real-world
+situations, or numerically solving difficult problems. However, the
+problems they are encountering are far more difficult, and far more
+interesting, than the problems you were forced to address in grade
+school. Even when mathematicians do focus on real-world phenomena,
+they typically invent new methods solving mathematical problems, or
+analyze existing methods, rather than just solving the mathematical
+problems.
+
+On to ``mathematical facts'': what exactly is a ``mathematical fact''?
+Instead of ``mathematical fact'', mathematicians usually use the term
+``proposition''. A proposition can either be true or
+false.\footnote{This isn't quite true. Sometimes a statement isn't
+  true, and it isn't false. We'll address this issue later. For now,
+  consider the phrase ``this statement is false.'' This is called the
+  liar's paradox.}  They typically take two forms:
+
+\begin{enumerate}
+\item \term{Axioms}, also called \term{postulates}, are very simple
+  statements that we accept without proof. You have to start
+  somewhere.
+\item \term{Theorems}, also called \term{lemmas}, are facts that can
+  be proven from other axioms or theorems.
+\end{enumerate}
+
+Most theorems are proved from other theorems, and not directly from
+the axioms. You generally want to minimize the number of axioms you
+use, in the interest of making your argument more
+believable.\footnote{This is a principle known as ``Occam's Razor''.}
+Nothing would ever get done if we had to start from axioms every time.
+
+\subsection{Logical implication}
+
+With that out of the way, let's address our first topic:
+\term{implication}. If we want to say that some proposition $A$
+implies another proposition $B$, we write $$A \implies B,$$ which
+should be read as ``$A$ implies $B$.''\footnote{The ``double arrow''
+  notation $A \Rightarrow B$ is far more common. Later, you'll see why
+  we use a single arrow.}  You should note that $A \implies B$ is
+itself a proposition.
+
+So, what does this mean? Well, $$A \implies B$$ is equivalent to
+saying \ctext{if $A$ then $B$.} The expression $B \impliedby A$ means
+the same thing as $A \implies B.$ Sometimes, you'll see $$A \iff B,$$
+which means \ctext{$A$ implies $B$, \xtb{and} $B$ implies $A$.} This
+should be read as ``$A$ if and only if $B$.'' Sometimes, you'll see
+the word \ctext{iff,} which isn't a word in English, but it's
+shorthand for \ctext{if and only if.}
+
+Think about this: $$A \implies B$$ means \ctext{if $A$ then $B$.}
+However, this could also be stated \ctext{$B$ if $A$.} Likewise, it
+could also be stated \ctext{$A$ only if $B$.} Hence, $A \iff B$ is
+usually said as ``$A$ if and only if $B$.''
+
+\subsection{Logical conjunction and disjunction}
+
+\term{Logical conjunction} is a fancy term for the word
+``and''. Sometimes, you'll see the notation $$A \land B,$$ which means
+the same thing as \ctext{$A$ logical-and $B$.} In this book, it's easy
+enough to just use text, so I'll just write $$A \tand B.$$ There's no
+real difference between ``logical-and'' and the normal way you use
+``and'' in everyday life.
+
+\emph{However}, there's a huge difference between \term{logical-or},
+and the colloquial meaning of ``or'', which is why we have the prefix
+``logical-''. What is ``logical-or'', then? Consider the phrase
+\ctext{$A$ or $B$.} In everyday life, this means that you can either
+have $A$, or you can have $B$, but you can't have both, and you can't
+have neither. In logic, the phrase \ctext{$A$ or $B$} allows you to
+have both.
+
 \section{Negation}
 \label{s:negation}
 
