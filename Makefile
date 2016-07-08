@@ -1,4 +1,4 @@
-all: build clean
+all: clean build
 
 build:
 	mkdir .build
