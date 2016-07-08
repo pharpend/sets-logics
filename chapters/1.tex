@@ -1,392 +1,75 @@
-\chapter{Propositional Logic}
-\label{propositions}
+\chapter{Basics}
+\label{basics}
 
 The goal of this chapter is to give you an idea of how to think
-mathematically. We introduce the notion of \term{propositions}, and
-then of \term{proofs}.
+mathematically. More importantly, you should learn how to express your
+ideas mathematically. The language of mathematics is extremely
+powerful, and surprisingly simple.
 
-\section{Propositions}
+While we are exploring mathematics, I will also display program code
+examples from a variety of programming languages, to show how our
+mathematical ideas translate over into programming.\footnote{The
+  program code examples are licensed under the FreeBSD (2-clause)
+  License, a copy of which can be found in \cref{bsd-license}.} In my
+experience, learning how to program helps with math, and learning math
+helps with programming.
 
-Let's invent a proposition, and call it $p$. $p$ is semantically
-equivalent to a ``statement''. A ``proof of $p$'' is a proof that $p$
-is true. To say
-
-\begin{zz}
-  f \text{ is a proof of } p,
-\end{zz}
-
-we write
-
-\begin{zz}
-  f : p.
-\end{zz}
-
-\begin{remark}
-  Outside of certain circles, the $f : p$ notation is very
-  non-standard. Later in the book, it will become clear why we use it.
-
-  I often, when writing, use the $:$ symbol to be short for ``such
-  that''. Again, you'll see why all of this makes sense later.
-\end{remark}
-
-\begin{aside}
-  In mathematics, it's very common to see notation you think is
-  confusing, only to discover---often several years later---that the
-  notation makes perfect sense and is actually brilliant.
-\end{aside}
-
-The most basic proofs begin with \term{axioms} (also called
-\term{postulates}) and then prove \term{theorems} (also called
-\term{lemmas}). However, most proofs incorporate previously proved
-lemmas to create new lemmas. If we had to start from the most basic
-axioms every time we proved anything, nothing would ever get done.
-
-\begin{definition}
-  \label{def:axiom}
-  \label{def:postulate}
-  An \term{axiom} (or \term{postulate}) is a proposition that we
-  accept to be true without proof.
-\end{definition}
-
-\begin{remark}
-  \label{r:law}
-  In most contexts, the term ``law'' is ambiguous. Sometimes, it
-  refers to theorems, sometimes it refers to lemmas. I won't call
-  anything that I define a ``law''. However, I will call things
-  ``laws'' if some vocabulary term is commonly known as ``the law of
-  X'' or ``X's law''. (See, for instance, \cref{ax:modus-ponens}).
-\end{remark}
-
-\begin{definition}
-  \label{def:theorem}
-  A \term{theorem} (or \term{lemma}) is a proposition that can be
-  proven from other axioms or theorems.
-\end{definition}
-
-\subsection{Implication}
-
-The first thing in logic is the notion of ``implication''. We write
-$a \implies b$ to say ``$a$ implies $b$''. This means ``if $a$ is
-true, then $b$ is also true'', or simply ``if $a$ then $b$''.
-
-\begin{axiom}[Law of Modus Ponens]
-  \label{ax:modus-ponens}
-  If $a$ implies $b$, and we know $a$ is true, then we can conclude
-  $b$.
-
-  In other words, ``$a$ implies $b$. $a$, therefore $b$''.
-\end{axiom}
-
-Usually, three dots arranged in a triangle are used to write
-``therefore'': $\therefore$.  The statement in \cref{ax:modus-ponens}
-can therefore be rewritten as:
-
-\begin{alignmath}{r}
-  a \implies b.\; a,\, \therefore b
-\end{alignmath}
-
-Sometimes, it's semantically convenient to write $b \impliedby a$,
-which just means ``$b$ is implied by $a$''. It's the same as
-$a \implies b$. This is also sometimes said ``$b$ if $a$''. This
-means, ``assuming $a$, we can prove $b$''.
-
-We'll also often write $a \iff b$ which means that $a$ implies $b$,
-\xtb{and} $b$ implies $a$. Usually, you'll hear this pronounced ``$a$
-if and only if $b$''. In a minute, we'll get to why people say ``if
-and only if'', as opposed to something like ``implies and is implied
-by''.
-
-\begin{remark}
-  Given two propositions $a$ and $b$, $a \implies b$ is actually a
-  proposition. The proposition is, $a$ implies $b$.
-\end{remark}
-
-Here are some more or less ``obvious'' properties of logic
-
-\begin{axiom}[Reflexive property]
-  \label{ax:props-refl}
-  For all propositions $a$, $a \implies a$.
-\end{axiom}
-
-\begin{lemma}[Transitive property]
-  \label{ax:props-trans}
-  For all propositions $a$, $b$, and $c$, if $a \implies b$, and $b
-  \implies c$, then $a \implies c$
-\end{lemma}
-
-\begin{proof}
-  Given $f : a \implies b$, and $g : b \implies c$, we are to prove $a
-  \implies c$. That is, assuming $a$, prove $c$. Let $h$ be our proof
-  of $a$ (i.e. $h : a$)
-\end{proof}
-
-\subsection{Negation}
-
-Quite often, we'll need to declare that something is false. To say
-that ``$a$ is false'', you write $\lnot a$, pronounced ``not $a$''.
-
-\begin{axiom}[Double negation]
-  The proposition $\lnot(\lnot a)$ is equivalent to $a$.
-\end{axiom}
-
-\begin{remark}
-  In many (indeed, most) logics, double negation is not accepted as an
-  axiom. Many important theorems rely on double negation.
-
-  For instance, the Intermediate Value Theorem in Calculus states
-  that, given two points on $a$ and $b$ that are values of a
-  ``continuous'' function (a function whose graph does not have any
-  gaps or poles), the function touches every single point between $a$
-  and $b$. Every known proof of the Intermediate Value Theorem relies
-  on double negation. More specifically, it relies on the
-  contrapositive, which we'll define in a second.
-\end{remark}
-
-\subsection{The contrapositive}
-
-Many logics define two values, $\top$, and $\bot$, called ``top'' and
-``bottom'', respectively. $\top$ is always provable, and $\bot$ is
-never provable. In those logics, the proposition $\lnot a$ is
-equivalent to $a \implies \bot$. If you can prove $a$ implies
-something that is never provable, you can conclude that $a$ is false.
-
-This is the common logical technique of \term{reductio ad absurdum},
-or \term{proof by contradiction}. ``Reductio ad absurdum'' is Latin
-for ``reduction to the absurd''.
-
-\begin{definition}
-  Given the proposition $a \implies b$, the proposition
-  $\lnot b \implies \lnot a$ is called the \term{contrapositive}.
-\end{definition}
-
-\begin{theorem}[Reductio ad absurdum]
-  \label{reductio-ad-absurdum}
-  Every proposition of the form $a \implies b$ is logically equivalent
-  to its contrapositive.
-\end{theorem}
-
-The fact that a proposition is logically equivalent to its
-contrapositive is not at all obvious. Let's go through some examples.
-
-\begin{example}
-  If someone is decapitated, then they are dead (at least within a few
-  seconds). Therefore,
-
-  \begin{zz}
-    \text{Decapitated} \implies \text{Dead}
-  \end{zz}
-
-  \answergraph{images/alas-poor-yorick.png}
-
-  Therefore, if someone is alive, you can conclude that they have not
-  been decapitated. Thus,
-
-  \begin{zz}
-    \text{not Dead} \implies \text{not Decapitated}
-  \end{zz}
-
-  This is the contrapositive.
-\end{example}
-
-We will circle back to proving the equivalence between a proposition
-and its contrapositive later on. To do this, we need to know what
-``equivalence'' is. The next section deals with defining equivalence.
-
-\section{Equivalence}
-
-What exactly does it mean for two propositions to be equivalent? What
-does it mean for two numbers to be equivalent? What does it mean for
-two shapes to be equivalent?
-
-You are probably tempted to say ``if $p = q$, then $p$ and $q$ are
-equivalent''! Problem solved, right?
-
-Well\dots not really. Think about this: the proposition $p \implies q$
-is equivalent to $\lnot q \implies \lnot p$. They are clearly not the
-same proposition, but they are logically equivalent\dots
-
-How do we universally define equivalence? Think about it for a
-second. In fact, I'm going to insert a page break so you can think
-about this without cheating and reading the answer. Go for a walk, get
-a cup of coffee, whatever it is you do, and think about this\dots
-
-\newpage
-
-Alright, you're back! The answer that mathematicians use is to define
-what are called \term{equivalence relations}. What on earth is an
-equivalence relation? For that matter, what is a ``relation''?
-
-We're going to explain all of that, as well as define an equivalence
-relation for propositions.
-
-Strictly speaking, a ``relation'' is something that takes one or more
-objects, and uses them to form a proposition. In this case, we're
-going to be studying relations that take two objects, called ``binary
-relations''. (The word ``binary'' means ``of or relating to two'').
-
-\begin{definition}
-  A \term{binary relation} is something that takes exactly two
-  objects, and determines whether or not something is true about them.
-\end{definition}
-
-There are, in more advanced areas, relations that require more than
-two things. However, for now, when I say ``relation'', I mean
-``binary relation''.
-
-\begin{aside}
-  There are also \term{unary relations} which take only one object. I
-  don't think calling them ``relations'' makes a whole lot of sense,
-  because the term ``relation'' implies that you are comparing one
-  thing \xti{relative} to other things. If there are no other things
-  to compare, the term ``relation'' doesn't make any
-  sense. Nonetheless, people use the term all the time.
-\end{aside}
-
-You already know quite a few relations.
+Here are some questions that will hopefully be answered in this
+chapter
 
 \begin{enumerate}
-\item Given two numbers $a$ and $b$, $=$ is a relation. It takes two
-  numbers and decides if they are equal.
-\item The symbol $\le$ is also a relation over numbers. It takes two
-  numbers, and decides if the first is less than or equal to the
-  second.
-\item The symbol $\implies$ is also a relation. It takes two
-  propositions, and decides if the first implies the second.
+\item What do you mean when you ``prove'' something in math? Is that
+  different than ``proving'' something in real life?
+\item How do I construct a mathematical proof, or even know what I'm
+  supposed to prove?
+\item If I'm proving something mathematically, what logical ``moves''
+  am I allowed to make?
 \end{enumerate}
 
-What is something we can say about $=$ that we can't say about $\le$?
+That last question might not make a whole lot of sense right now, but
+it will later on when you construct some proofs. You'll see that it's
+a bit like a game of chess: you have a goal, and you have to figure
+out how to get there. There are a limited number of ``moves'' you are
+allowed to make to get to your goal. Sometimes, you won't be able to
+figure out how to get to your goal. Sometimes, it will turn out that
+it's impossible to get to your goal.
 
-The answer is that $=$ is an ``equivalence relation''. Meaning that it
-satisfies the properties in the next definition
+\begin{enumerate}[start=4]
+\item I learned in school things like, for two numbers,
+  $a + b = b + a$. How do we know that's true? Could there be some
+  situation where that isn't true?
+\item What is a set?
+\item If we have two sets, how do we determine which one is
+  ``larger''?
+\item I've heard of ``cardinal numbers''. What are those? Do they have
+  anything to do with the bird?
+\item Can we just talk about birds instead of math?
+\end{enumerate}
 
-\begin{definition}
-  An \term{equivalence relation} is a binary relation $\sim$ satisfying
-  these properties:
+\Cref{s:props-proofs} and \cref{s:negation} deal with the first three
+questions. \Cref{s:sets}, \cref{s:nats}, and \cref{s:other-numbers}
+deal with the next two questions. \Cref{s:cardinality} deals with
+questions 6 and 7. The answer to question 8 is ``no''.
 
-  \begin{enumerate}
-  \item for all $a$, $a \sim a$ (reflexive property),
-  \item for all $a$ and $b$, $a \sim b$ implies $b \sim a$ (symmetric
-    property),
-  \item for all $a$, $b$ and $c$, $a \sim b$ and $b \sim c$ imply
-    $a \sim c$ (transitive property).
-  \end{enumerate}
-\end{definition}
+\section{Propositions \& Proofs}
+\label{s:props-proofs}
 
-The standard equivalence relation is $=$. It has all of those
-properties.
+\section{Negation}
+\label{s:negation}
 
-If you'll notice, $\le$ and $\implies$ have all of those properties,
-except symmetry.
+\section{Sets}
+\label{s:sets}
 
-Is there a relation for propositions that has symmetry? (That is, an
-equivalence relation for propositions).
+\section{Natural numbers}
+\label{s:nats}
+\label{s:induction}
 
-Think about it for a minute. I'll give you another page break\dots
+\section{Unnatural numbers}
+\label{s:unnats}
+\label{s:other-numbers}
 
-\newpage
+\section{Functions}
+\label{s:functions}
 
-Turns out, there is an equivalence relation! The relation is
-$\iff$. Think about it:
-
-\begin{description}
-\item[Reflexivity] For all propositions $p$, $p \iff
-  p$. (\Cref{ax:props-refl})
-\item[Symmetry] For all propositions $p$ and $q$, $p \iff q$ implies
-  $q \iff p$.
-\item[Transitivity] For all propositions $p$, $q$ and $r$, $p \iff q$
-  and $q \iff r$ imply $p \iff r$. (\Cref{ax:props-trans})
-\end{description}
-
-Can you think of some other equivalence relations? Many of them are
-not at all obvious.
-
-\begin{example}
-  Analog clocks and watches give the time in 12-hour format. However,
-  there are 24 hours in a day. When you say ``14:00 is the same as
-  2:00'', you're actually saying ``14 is congruent to 2, modulo
-  12''. The way we write this is with
-
-  \begin{zz}
-    14 \equiv 2 \mod 12
-  \end{zz}
-
-  What exactly is ``modulo''? Technically speaking, $n$ modulo $m$ is
-  the remainder of dividing $n$ by $m$. So, $14 / 12 = 1$ with a
-  remainder of $2$. We'll get to this more in-depth when we discuss
-  arithmetic.
-
-  Here's a fun thing, you can add two times together to get a new
-  time. For instance, let's say you go into work at 9:00 in the
-  morning, and stay for 8 hours. $9 + 8 = 17$. However,
-  $17 \equiv 5 \mod 12$, which means you stay until 5 PM. You've been
-  secretly using this equivalence relation your entire life.
-
-  We'll learn later, in the Algebra section, that integers modulo 12
-  (i.e. numbers on a clock) form a \term{module} of the integers
-  (hence the term ``modulo''). Meaning this:
-
-  \begin{enumerate}
-  \item Given two times, $a$ and $b$ in the module, $a + b$ is also in
-    the module.
-  \item Given an integer\footnote{An integer is a positive, negative
-      or zero whole number.} $z$, and a time $t$, $zt$ is also in the
-    subgroup.\footnote{The notation $zt$ just means ``$z$ times
-      $t$''.}
-  \end{enumerate}
-
-  There are a number of other properties that have to hold, but those
-  are the properties unique to modules.
-
-  Can you think of some other modules?
-
-  I'll give you a hint: even numbers are also a module.
-\end{example}
-
-\subsection{Contrapositive}
-
-Circling back to the contrapositive: I claimed a proposition of the
-form $a \implies b$ is equivalent to its contrapositive. Now that
-we've defined equivalence, we're much more equipped to prove this.
-
-Two propositions $p$ and $q$ are equivalent if\footnote{Actually, it's
-  ``if and only if'', because two propositions $p$ and $q$ being
-  ``equivalent'' means $p \iff q$. However, it's conventional to say
-  ``if'' when parroting a definition.} $p \iff q$. Therefore,
-
-\begin{lemma}
-  \label{thm:contrapositive}
-  $(a \implies b) \iff (\lnot b \implies \lnot a)$.
-\end{lemma}
-
-\begin{proof}
-  The most common way to prove an ``if and only if'' statement is to
-  separately prove the $\implies$ branch, and the $\impliedby$ branch.
-
-  \begin{description}
-  \item[Branch $\implies$] Given $a \implies b$, we are to prove
-    $\lnot b \implies \lnot a$. First, we expand $\lnot b$ and $\lnot
-    a$ into
-
-    \begin{rcl}
-      \lnot a & \implies & (a \implies \bot) \\
-      \lnot b & \implies & (b \implies \bot) \\
-    \end{rcl}
-
-    Therefore, we are to prove
-    $(b \implies \bot) \implies (a \implies \bot)$. We are trying to
-    prove ``if we can show $b \implies \bot$, we can show
-    $a \implies \bot$. Therefore, we can assume $b \implies \bot$, and
-    then use that to prove $a \implies \bot$.
-
-    It might be helpful to assign labels to things. Let
-
-    \begin{rcl}
-      f & : & a \implies b \\
-      g & : & b \implies \bot \\
-      \tabucline \\
-      \text{goal} & : & a \implies \bot \\
-    \end{rcl}
-
-    We could either use the transitive property
-  \end{description}
-\end{proof}
+\section{Cardinality}
+\label{s:cardinality}
