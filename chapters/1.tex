@@ -35,9 +35,9 @@ we write
   notation makes perfect sense and is actually brilliant.
 \end{aside}
 
-The most basic proofs begin with \term{axioms}---also called
-\term{postulates}---and then prove \term{theorems}---also called
-\term{lemmas}. However, most proofs incorporate previously proved
+The most basic proofs begin with \term{axioms} (also called
+\term{postulates}) and then prove \term{theorems} (also called
+\term{lemmas}). However, most proofs incorporate previously proved
 lemmas to create new lemmas. If we had to start from the most basic
 axioms every time we proved anything, nothing would ever get done.
 
@@ -108,11 +108,17 @@ Here are some more or less ``obvious'' properties of logic
   For all propositions $a$, $a \implies a$.
 \end{axiom}
 
-\begin{axiom}[Transitive property]
+\begin{lemma}[Transitive property]
   \label{ax:props-trans}
   For all propositions $a$, $b$, and $c$, if $a \implies b$, and $b
   \implies c$, then $a \implies c$
-\end{axiom}
+\end{lemma}
+
+\begin{proof}
+  Given $f : a \implies b$, and $g : b \implies c$, we are to prove $a
+  \implies c$. That is, assuming $a$, prove $c$. Let $h$ be our proof
+  of $a$ (i.e. $h : a$)
+\end{proof}
 
 \subsection{Negation}
 
@@ -356,5 +362,31 @@ Two propositions $p$ and $q$ are equivalent if\footnote{Actually, it's
   The most common way to prove an ``if and only if'' statement is to
   separately prove the $\implies$ branch, and the $\impliedby$ branch.
 
-  \dots
+  \begin{description}
+  \item[Branch $\implies$] Given $a \implies b$, we are to prove
+    $\lnot b \implies \lnot a$. First, we expand $\lnot b$ and $\lnot
+    a$ into
+
+    \begin{rcl}
+      \lnot a & \implies & (a \implies \bot) \\
+      \lnot b & \implies & (b \implies \bot) \\
+    \end{rcl}
+
+    Therefore, we are to prove
+    $(b \implies \bot) \implies (a \implies \bot)$. We are trying to
+    prove ``if we can show $b \implies \bot$, we can show
+    $a \implies \bot$. Therefore, we can assume $b \implies \bot$, and
+    then use that to prove $a \implies \bot$.
+
+    It might be helpful to assign labels to things. Let
+
+    \begin{rcl}
+      f & : & a \implies b \\
+      g & : & b \implies \bot \\
+      \tabucline \\
+      \text{goal} & : & a \implies \bot \\
+    \end{rcl}
+
+    We could either use the transitive property
+  \end{description}
 \end{proof}
