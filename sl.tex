@@ -96,11 +96,11 @@
 \renewcommand{\iff}{\Leftrightarrow}
 
 \newenvironment{alignmath}[1]
-  {\begin{zz}\begin{array}{#1}}
-  {\end{array}\end{zz}}
+  {\begin{zz}\begin{tabu}{#1}}
+  {\end{tabu}\end{zz}}
 \newenvironment{rcl}
-  {\begin{eqnarray*}}
-  {\end{eqnarray*}}
+  {\begin{alignmath}{rcl}}
+  {\end{alignmath}}
 \newenvironment{rclmath}
   {\begin{rcl}}
   {\end{rcl}}
