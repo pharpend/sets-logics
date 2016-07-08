@@ -1,7 +1,10 @@
 \chapter{Introduction}
 
 Hi, there! This is a textbook explaining the basic notions in pure
-mathematics. If you want to jump in, go to \cref{propositions}.
+mathematics.  The book currently goes over basic propositional logic,
+set theory, and function theory. I eventually want to expand it to go
+over arithmetic in a rigorous and fun way.  If you want to jump in, go
+to \cref{propositions}.
 
 First of all, what is ``pure mathematics''. A simple definition is
 ``math that is not applied''. However, that is misleading, because it
@@ -15,35 +18,39 @@ useful.
 \section{Motivations and Ideology}
 
 In American high schools, mathematics is approached as a tool for
-computation, and it's almost always studied in the context of real
-life applications. This is even true of most low-level university
-courses.
+computation, and it's almost always studied in the context of
+real-world applications. This is even true of most low-level
+university courses.
 
-In my experience, this usually leads people to think that math is
+Here's the problem: the real world is actually rather boring. Focusing
+on real-world applications usually leads people to think that math is
 difficult and boring. Math can be difficult, but if you look at it the
-right way, it's definitely not boring.
+right way, it's definitely not boring.  It's only in the second half
+of an undergraduate math track that most students are immersed in pure
+mathematics.
 
-It's only in the second half of an undergraduate math track that most
-students are immersed in pure mathematics. Part of this process is
-usually students going back and re-learning all of the stuff they
-learned in high school and early college, because they didn't learn it
-with enough mathematical rigor. This means that high school and the
-first half of college are usually a complete waste of math students'
-time.
+Part of this process is usually students going back and re-learning
+all of the stuff they learned in high school and early college,
+because they didn't learn it with enough mathematical rigor. This
+means that high school and the first half of college are usually a
+complete waste of math students' time.
 
 \subsection{Target audience}
 
-I am of the opinion that, if you just learn mathematics correctly the
-first time through, it will be a lot easier. This book contains
-elementary mathematics taught ``correctly''. I put that in quotation
-marks because I'm sure someone will disagree with me. Mathematics is a
-subject that becomes easier to understand the more you look into it.
+The target audience is (roughly) people who know basic and
+intermediate algebra (i.e. solving static equations) and would like to
+gain a deeper understanding of mathematics. This book \xti{might} be
+suitable as supplementary material for people learning basic algebra.
+However, it's assumed that you know how to solve reasonably simple
+static equations.
 
-The book currently goes over basic propositional logic, set theory,
-and function theory. I eventually want to expand it to go over
-arithmetic in a rigorous and fun way.
+In particular, I've noticed that there are a large number of
+programmers who want to understand advanced topics in computer
+science, but don't have a suitable mathematical background to attack
+said topics effectively. Most of the early audience of this book is
+people in that situation, so it's particularly suited to them.
 
-\section{Contributing}
+\subsection{Contributing}
 
 You are welcome---and encouraged---to contribute to this book. The
 \LaTeX\ source for the book is on GitHub
@@ -68,7 +75,8 @@ same license.
 Definitions, theorems, axioms, etc are numbered so they can be found
 quickly. If I refer to ``definition X.Y.Z'', that means, the Zth
 definition, in chapter X, section Y. Definitions, theorems, axioms,
-etc. all use the same counter. For instance,
+etc. all use the same counter.\footnote{I took this idea from Joseph
+  L. Taylor's \xti{Foundations of Analysis}.} For instance,
 
 \begin{definition}
   Here's a definition!
@@ -81,3 +89,10 @@ etc. all use the same counter. For instance,
 \begin{axiom}
   Here's an axiom.
 \end{axiom}
+
+Exercises don't use the same counter as everything else. They are also
+separated by section. For instance,
+
+\begin{exercise}
+  Here's an exercise.
+\end{exercise}
