@@ -46,12 +46,12 @@ it's impossible to get to your goal.
 \item Can we just talk about birds instead of math?
 \end{enumerate}
 
-\Cref{s:props-proofs} and \cref{s:negation} deal with the first three
+\Cref{s:props-proofs} deals with the first three
 questions. \Cref{s:sets}, \cref{s:nats}, and \cref{s:other-numbers}
 deal with the next two questions. \Cref{s:cardinality} deals with
 questions 6 and 7. The answer to question 8 is ``no''.
 
-\section{Propositions \& Proofs}
+\section{Propositions and Boolean logic}
 \label{s:props-proofs}
 
 Thomas Goller wrote an excellent series of lecture notes for the
@@ -120,14 +120,18 @@ However, this could also be stated \ctext{$B$ if $A$.} Likewise, it
 could also be stated \ctext{$A$ only if $B$.} Hence, $A \iff B$ is
 usually said as ``$A$ if and only if $B$.''
 
+``If and only if'' can also be thought of as ``is logically equivalent
+to''.
+
 \subsection{Logical conjunction and disjunction}
 
 \term{Logical conjunction} is a fancy term for the word
 ``and''. Sometimes, you'll see the notation $$A \land B,$$ which means
 the same thing as \ctext{$A$ logical-and $B$.} In this book, it's easy
-enough to just use text, so I'll just write $$A \tand B.$$ There's no
-real difference between ``logical-and'' and the normal way you use
-``and'' in everyday life.
+enough to just use text, so I'll just write $$A \tand B.$$ However,
+when writing by hand, it's quicker to write the $\land$
+symbol. There's no real difference between ``logical-and'' and the
+normal way you use ``and'' in everyday life.
 
 \emph{However}, there's a huge difference between \term{logical-or},
 and the colloquial meaning of ``or,'' which is why we have the prefix
@@ -135,10 +139,257 @@ and the colloquial meaning of ``or,'' which is why we have the prefix
 \ctext{$A$ or $B$.} In everyday life, this means that you can either
 have $A$, or you can have $B$, but you can't have both, and you can't
 have neither. In logic, the phrase \ctext{$A$ or $B$} allows you to
-have both.
+have both. The notion of ``logical-or'' is sometimes called
+\term{logical disjunction}. When writing things by hand, the
+notation $$A \lor B$$ is popular.
 
-\section{Negation}
-\label{s:negation}
+It might be helpful to construct what's called a ``truth table''
+
+\begin{table}[h]
+  \centering
+  \begin{tabu}[c]{r|cc}
+    $\land$ & \True  & \False \\
+    \tabucline \\
+    \True  & \True  & \False \\
+    \False & \False & \False \\
+  \end{tabu}
+  \caption{Truth table for logical-and}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \begin{tabu}[c]{r|cc}
+    $\lor$ & \True  & \False \\
+    \tabucline \\
+    \True  & \True  & \True \\
+    \False & \True & \False \\
+  \end{tabu}
+  \caption{Truth table for logical-or}
+\end{table}
+
+Most people have little to no trouble understanding these concepts, so
+I'm going to move on.
+
+
+\subsection{Properties of logic}
+
+It's time to introduce a number of properties of implication, as well
+as properties of logical-and, logical-or, and logical-not. The study
+and manipulation of these properties are commonly referred to as
+\term{Boolean algebra}, after the English mathematician George Boole.
+
+\begin{axiom}
+  Given a proposition $A$, $$A \implies A.$$ This is called the
+  \term{reflexive property}.
+\end{axiom}
+
+\begin{axiom}
+  Given three propositions $A$, $B$, and $C$, if $$A \implies B$$
+  and $$B \implies C,$$ then $$A \implies C.$$ This is called the
+  \term{transitive property}. In our notation, this is
+  $$(A \implies B)\tand (B \implies C) \implies (A \implies C).$$
+\end{axiom}
+
+\begin{lemma}
+  If $$A \implies C,$$ and $$A \iff B$$, then $$B \implies C$$. This
+  is called the \term{substitution property}.
+\end{lemma}
+\begin{proof}
+  This is actually a special case of the transitive property, and, in
+  fact, we only need $A \impliedby B$. In that case, we have
+  $B \implies A$, and $A \implies C$, which means that $B \implies C$.
+\end{proof}
+
+The white box means ``end of proof''. You'll sometimes see/hear the
+phrase ``QED'', which stands for ``quod erat demonstrandum'', Latin
+for ``end of proof''.
+
+The proof of this lemma is very similar, and is left as an exercise:
+
+\begin{lemma}
+  \label{conclusion-substitution}
+  If $$A \implies B,$$ and $$B \iff C,$$ then $$A \implies C.$$
+\end{lemma}
+
+The following ``lemmas'' can be proven simply by \term{case
+  analysis}. Case analysis is where you separately consider every
+possible case of a variable (in this case, a proposition), and then
+prove the larger proposition in each individual case. I'll do the
+first one. The rest are ``obvious'', to varying degrees. The only ones
+that aren't are the distributive laws, the proofs of which are left as
+exercises.
+
+\begin{lemma}
+  Given three propositions $A$, $B$, and $C$,
+  $$A \tand (B \tand C) \iff (A \tand B) \tand C.$$ This is called
+  \term{the associative property}.
+\end{lemma}
+
+\begin{proof}
+  Do case analysis on $A$:
+
+  \begin{description}
+  \item[Case $A$ is true] In this case, we have, on the left-hand side
+    of the $\iff$ symbol, $$\True \tand (B \tand C),$$ which, from our
+    truth table above, will be equal to whatever $B \tand C$ is. By
+    the substitution property, our proposition is now reduced to
+    $$B \tand C \iff (\True \tand B) \tand C.$$ Doing the same thing
+    again, $$\True \tand B \iff B,$$ by our truth table. Therefore, we
+    can replace the left-hand side with $$B \tand C.$$ Our proposition
+    is now $$B \tand C \iff B \tand C,$$ which is true by the
+    reflexive property.
+  \item[Case $A$ is false] In this case, we have, on the left-hand
+    side as $\False \tand (B \tand C)$. If you'll remember from the
+    truth table, it doesn't matter what $B \tand C$ is, the entire
+    statement is false. Therefore, our proposition is
+    $$\False \iff (A \tand B) \tand C.$$ We do the same thing on the
+    right-hand side (you have to do it twice) to get
+    $$\False \iff \False,$$ which, again, is true by the reflexive property.
+  \end{description}
+\end{proof}
+
+\begin{lemma}
+  \label{and-symmetry}
+  Given two propositions $A$ and $B$, $$A \tand B \iff B \tand A.$$
+  This is the \term{commutative property}, or the \term{symmetry
+    property}.
+\end{lemma}
+
+\begin{lemma}
+  \label{or-assoc}
+  Given two propositions $A$, $B$, and $C$,
+  $$A \tor (B \tor C) \iff (A \tor B) \tor C.$$ This is yet another
+  iteration of the \term{associative property}, this time for
+  logical-or.
+\end{lemma}
+\begin{lemma}
+  \label{or-symmetry}
+  Given two propositions $A$ and $B$, $$A \tor B \iff B \tor A.$$
+  Guess which property this is.
+\end{lemma}
+
+\begin{lemma}
+  \label{and-or-dist}
+  Given three propositions $A$, $B$, and $C$,
+  $$A \tand (B \tor C) \iff (A \tand B) \tor (A \tand C).$$ This is
+  the \term{distributive property}.
+\end{lemma}
+
+\begin{lemma}
+  \label{or-and-dist}
+  Given three propositions $A$, $B$, and $C$,
+  $$A \tor (B \tand C) \iff (A \tor B) \tand (A \tor C).$$ This is
+  another instance of the \term{distributive property}.
+\end{lemma}
+
+\subsection{Negation}
+
+If we have some proposition $A$, we might want to say that $A$ is
+false. How do we go about doing that? The answer is with logical
+negation. We write $$\lnot A$$ to say \ctext{$A$ is false.} The
+expression $\lnot A$ should be read as ``not $A$.''
+
+Now that you know what negation is, I can explain the
+contrapositive. Given a proposition of the form $$A \implies B,$$ its
+\term{contrapositive} is $$\lnot B \implies \lnot A.$$ It's not
+entirely obvious why a proposition is equivalent to its
+contrapositive. I think an example might help.
+
+\begin{example}
+  If someone is decapitated, they are dead, at least within a few
+  seconds. Therefore, \ctext{Decapitated $\implies$ Dead.} If someone
+  is alive (i.e. not dead), you can very reasonably conclude that they
+  have not been decapitated. Hence,
+  $$\lnot\text{Dead} \implies \lnot\text{Decapitated}.$$
+\end{example}
+
+\answergraph{images/alas-poor-yorick.png}
+
+If you are trying to prove something, it's often significantly easier
+to prove its contrapositive. This technique is called \term{proof by
+  contradiction}. More generally, if you are trying to prove $B$, and
+you can prove that $\lnot B$ implies $\lnot A$, but you know $A$ is
+true, then you can conclude $B$ is true. $B$ being false would present
+a \term{contradiction}. That's why the contrapositive is super
+important.
+
+\begin{remark}
+  It's worth noting that many logical systems, or just ``logics''
+  don't allow for proof by contradiction. We'll explore these
+  later. For now, just keep in mind that sometimes, the ideas that
+  seem reasonable and ``obvious'' will later turn out to be
+  problematic.
+\end{remark}
+
+\paragraph{Properties involving negation}
+
+Here's your favorite part: dry listings of ``obvious'' properties,
+which you have to prove as exercises!
+
+\begin{lemma}
+  \label{double-negation}
+  Given a proposition $A$,
+  $$A \iff \lnot(\lnot A).$$ This is called \term{double negation}.
+\end{lemma}
+\begin{lemma}
+  \label{de-morgan-1}
+  Given two propositions $A$ and $B$,
+  $$\lnot(A \tand B) \iff (\lnot A) \tor (\lnot B).$$ This is one of
+  \term{De Morgan's laws}.
+\end{lemma}
+\begin{lemma}
+  \label{de-morgan-2}
+  Given two propositions $A$ and $B$,
+  $$\lnot(A \tor B) \iff (\lnot A) \tand (\lnot B).$$ This is the
+  other of \term{De Morgan's laws}.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem}
+  Given a proposition $A$, $$A \tor \lnot A$$ is true. This is called
+  \term{the law of excluded middle}.
+\end{lemma}
+
+The proof of the law of excluded middle (LEM) is beyond
+trivial. However, there's an alternate way of stating LEM, which is
+not at all obvious or trivial, but is logically equivalent:
+
+\begin{lemma}
+  \label{peirce}
+  Given two propositions, $A$ and $B$,
+  $$((A \implies B) \implies A) \implies A.$$ This is called
+  \term{Peirce's law},\footnote{No, that's not a typo, it's spelled
+    ``Peirce''.} and it's equivalent to the law of excluded middle.
+\end{lemma}
+
+It's going to take you a little minute to even convince yourself that
+that's true. The proof is quite difficult. However, you'll very rarely
+ever actually use Peirce's law directly, so it's okay if you can't
+figure out how to prove it, and aren't entirely convinced that it's
+true. If there comes a day when you do find yourself needing Peirce's
+law, you'll likely know logic well enough to prove its equivalence to
+the law of excluded middle. $\aleph$
+
+\subsection{Exercises}
+
+\begin{exercise}
+  Prove \cref{conclusion-substitution}.
+\end{exercise}
+\begin{exercise}
+  Prove \cref{and-or-dist}.
+\end{exercise}
+\begin{exercise}
+  Prove \cref{or-and-dist}.
+\end{exercise}
+\begin{exercise}
+  Prove \cref{de-morgan-1}.
+\end{exercise}
+\begin{exercise}
+  Prove \cref{de-morgan-2}.
+\end{exercise}
+\begin{exercise}
+  Prove \cref{peirce}.
+\end{exercise}
 
 \section{Sets}
 \label{s:sets}
