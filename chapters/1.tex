@@ -1,20 +1,199 @@
 \chapter{Basics}
 \label{basics}
 
-The goal of this chapter is to give you an idea of how to think
-mathematically. More importantly, you should learn how to express your
-ideas mathematically. The language of mathematics is extremely
-powerful, and surprisingly simple.
+\sillygraph{images/f-mustache-2-gimped.png} The goal of this chapter
+is to give you an idea of how to think mathematically. More
+importantly, you should learn how to express your ideas
+mathematically. The language of mathematics is extremely powerful, and
+surprisingly simple.
+
+
+\subsection{Programming}
 
 While we are exploring mathematics, I will also display program code
-examples from a variety of programming languages, to show how our
-mathematical ideas translate over into programming.\footnote{The
-  program code examples are licensed under the FreeBSD (2-clause)
-  License, a copy of which can be found in \cref{bsd-license}.} In my
-experience, learning how to program helps with math, and learning math
-helps with programming.
+examples from a variety of programming languages, (but mostly Haskell)
+to show how our mathematical ideas translate over into
+programming.\footnote{The program code examples are licensed under the
+  FreeBSD (2-clause) License, a copy of which can be found in
+  \cref{bsd-license}.} In my experience, learning how to program helps
+with math, and learning math helps with programming.
 
-Here are some questions that will hopefully be answered in this
+In particular, Haskell is a \term{functional} programming language,
+meaning that you program entirely with \term{mathematical
+  functions}. Hey, here's our first informal definition!
+
+\begin{definition}
+  A \term{mathematical function} is something that takes some input,
+  and gives a deterministic output. That is, given a function $f$, and
+  two objects $a$ and $b$, \ctext{if $a = b$, then $f(a) = f(b)$.}
+\end{definition}
+
+Don't worry if you don't understand all of this right now, it will
+make a lot more sense later. Just keep moving.
+
+\begin{example}
+  Here's a function that takes a number and adds $2$ to it: $$f(x) =
+  x + 2.$$
+\end{example}
+
+The defining characteristic of a \emph{mathematical} function is,
+\textbf{if you call a function twice with the same arguments, you
+  should get the same result}. This is called \term{referential
+  transparency}.  This \emph{might} seem obvious. However, in most
+programming languages, it doesn't hold up. For instance, consider this
+seemingly innocuous code in Python's interactive console:
+
+\begin{lstlisting}[language={Python}]
+>>> import random
+>>> random.randint(0, 5)
+3
+>>> random.randint(0, 5)
+4
+\end{lstlisting}
+
+I called the same ``function'' twice, with the same arguments, and got
+a different result. Therefore, \monospace{random.randint} is \xtb{not}
+a mathematical function. Haskell works exclusively with mathematical
+functions.
+
+\question{How do you do things like tell the time?}
+
+A common thing you need to do while programming is figure out what
+time it is. In Python, this is pretty easy
+
+\begin{lstlisting}[language=Python]
+>>> import time
+>>> print(time.strftime('The time right now is %-l:%M:%S %p.'))
+The time right now is 4:28:01 PM.
+>>> print(time.strftime('The time right now is %-l:%M:%S %p.'))
+The time right now is 4:28:02 PM.
+\end{lstlisting}
+
+Again, called the same function with the same argument, and got a
+different result.
+
+\question{Yeah\dots not being able to fetch the current time, or use
+  random numbers sounds insane\dots}
+
+You \emph{can} do those things in Haskell, but you have to make use of
+a mathematical structure called a \term{monad}. We'll probably get to
+that later.
+
+\paragraph{Installing Haskell} I could spend three hours, and write
+out very detailed instructions, with screenshots, for installing
+Haskell on every operating, only to have them become obsolete in 6
+months. \emph{Or}, I could just direct you to an online resource that
+will always be up to date:
+\barelink{https://www.haskell.org/downloads}.
+
+
+\begin{remark}
+  It's very important to note that referential transparency simply
+  means \ctext{if $a = b$, then $f(a) = f(b)$.} It \xtb{does not} mean
+  \ctext{if $f(a) = f(b)$, then $a = b$.} (If that is true, then the
+  function is \term{injective}.)\footnote{The word \term{injective} is
+    sometimes replaced with \term{one-to-one}.}
+
+  Certainly, not all functions are injective. For instance,
+  consider $$f(x) = x^2.$$ We have
+
+  \begin{align*}
+    f(5) & = 5^2 \\
+         & = 25, \\
+  \end{align*}
+
+  and
+
+  \begin{align*}
+    f(-5) & = (-5)^2 \\
+         & = 25. \\
+  \end{align*}
+
+  Therefore, $f(x) = x^2$ is \xtb{not} injective.
+\end{remark}
+
+\begin{aside}
+  A common problem---``goal'' might be a better word---in mathematics
+  is finding the inverse of a function. That is, \ctext{$g$ is the
+    \term{left inverse} of $f$ if $g(f(a)) = a$, for all $a$.}
+
+  (You apply it on the left, that's why it's called a left inverse.)
+
+  Let's go back to $$f(x) = x^2.$$ If we let $$g(y) = \sqrt{x},$$ then
+  your instinct is to think that $g$ is $f$'s left inverse, because
+  $$g(f(x)) = \sqrt{x^2}$$ looks like it \emph{should} be just
+  $x$. However,
+
+  \begin{align*}
+    g(f(-5)) & = \sqrt{(-5)^2} \\
+             & = \sqrt{25} \\
+             & = 5
+  \end{align*}
+
+  and $5$ is certainly not equal to $-5$. Therefore, $g$ is \xtb{not}
+  a left-inverse of $f$.
+\end{aside}
+
+
+\question{You showed above that $f$ is not injective. Is there any
+  connection between a function being injective, and the function
+  being invertible?}
+
+Yes, there is. In fact, we'll prove later, for a function to be
+left-invertible, it needs to be injective.
+
+\question{Is there such a thing as a right inverse?}
+
+Yes. I'll let you try to think of what those might be. There's a
+separate condition that needs to hold for a function to be
+right-invertible, called \term{surjectivity}. To understand what
+surjectivity is, we need to understand a bit more about sets and logic
+first. That's part of what this chapter addresses.
+
+
+\question{The idea of an inverse seems really general. Can we have
+  like, an inverse of a number?}
+
+Yes, you can! In fact, there are two general types of inverses:
+
+\begin{enumerate}
+\item \term{additive inverses}, like $-x$, and
+\item \term{multiplicative inverses}, like $\frac{1}{x}$.
+\end{enumerate}
+
+\question{Which category do function inverses fall under?}
+
+Either one, actually. The distinction only applies when you have some
+situation in which some objects have one type of inverse, and not the
+other, or when they have both types of inverses.
+
+\question{Are the left inverse and the right inverse always equal?}
+
+I'll let you think about it. Hint: there's another condition, which is
+true of numbers, that guarantees that the left and right inverses are
+the same.
+
+\question{Can you give me an example of some situation where the two
+  inverses are not equal?}
+
+I just did, with functions, actually.
+
+\begin{remark}
+  I've subtly assumed you know all of the following things:
+
+  \begin{enumerate}
+  \item what a ``function'' is,
+  \item what an ``argument'' is,
+  \item what the notation $f(x)$ means,
+  \item what it means for some value $x$ to equal some value $y$
+    (i.e. $x = y$).
+  \end{enumerate}
+
+  If you don't know what those things are, don't feel bad. I'll
+  address these questions with some depth later on in the chapter.
+\end{remark}
+
+Here are some more questions that will hopefully be answered in this
 chapter
 
 \begin{enumerate}
@@ -53,6 +232,9 @@ questions 6 and 7. The answer to question 8 is ``no''.
 
 \section{Propositions and Boolean logic}
 \label{s:props-proofs}
+\label{props-proofs}
+\label{s:logic}
+\label{logic}
 
 Thomas Goller wrote an excellent series of lecture notes for the
 discrete math course taught at the University of
@@ -115,13 +297,14 @@ should be read as ``$A$ if and only if $B$.'' Sometimes, you'll see
 the word \ctext{iff,} which isn't a word in English, but it's
 shorthand for \ctext{if and only if.}
 
-Think about this: $$A \implies B$$ means \ctext{if $A$ then $B$.}
-However, this could also be stated \ctext{$B$ if $A$.} Likewise, it
-could also be stated \ctext{$A$ only if $B$.} Hence, $A \iff B$ is
-usually said as ``$A$ if and only if $B$.''
+\begin{remark}
+  A common mistake is, if you know $A \implies B,$ and then conclude,
+  ``well, if I know $B$ is true, then I can reasonably conclude $A$ is
+  true, because $A$ implies $B$.'' That's unfortunately not true.
+\end{remark}
 
-``If and only if'' can also be thought of as ``is logically equivalent
-to''.
+\answergraph{images/alligator-attack-1-gimped.png}
+\answergraph{images/alligator-attack-2-gimped.png}
 
 \subsection{Logical conjunction and disjunction}
 
@@ -167,9 +350,10 @@ It might be helpful to construct what's called a ``truth table''
   \caption{Truth table for logical-or}
 \end{table}
 
-Most people have little to no trouble understanding these concepts, so
-I'm going to move on.
+Here's how we toy around with this in \ghci
 
+In my experience, most people have little to no trouble understanding
+these concepts, so I'm going to move on.
 
 \subsection{Properties of logic}
 
@@ -187,11 +371,13 @@ and manipulation of these properties are commonly referred to as
   Given three propositions $A$, $B$, and $C$, if $$A \implies B$$
   and $$B \implies C,$$ then $$A \implies C.$$ This is called the
   \term{transitive property}. In our notation, this is
-  $$(A \implies B)\tand (B \implies C) \implies (A \implies C).$$
+  $$[(A \implies B)\tand (B \implies C)] \implies (A \implies C).$$
 \end{axiom}
 
+Note
+
 \begin{lemma}
-  If $$A \implies C,$$ and $$A \iff B$$, then $$B \implies C$$. This
+  If $$A \implies C,$$ and $$A \iff B,$$ then $$B \implies C.$$ This
   is called the \term{substitution property}.
 \end{lemma}
 \begin{proof}
@@ -204,20 +390,14 @@ The white box means ``end of proof''. You'll sometimes see/hear the
 phrase ``QED'', which stands for ``quod erat demonstrandum'', Latin
 for ``end of proof''.
 
-The proof of this lemma is very similar, and is left as an exercise:
+The proof of this lemma is very similar, and is left as an
+exercise. If you don't do the exercises, you should at least convince
+yourself that the lemma is true.
 
 \begin{lemma}
   \label{conclusion-substitution}
   If $$A \implies B,$$ and $$B \iff C,$$ then $$A \implies C.$$
 \end{lemma}
-
-The following ``lemmas'' can be proven simply by \term{case
-  analysis}. Case analysis is where you separately consider every
-possible case of a variable (in this case, a proposition), and then
-prove the larger proposition in each individual case. I'll do the
-first one. The rest are ``obvious'', to varying degrees. The only ones
-that aren't are the distributive laws, the proofs of which are left as
-exercises.
 
 \begin{lemma}
   Given three propositions $A$, $B$, and $C$,
@@ -234,10 +414,11 @@ exercises.
     truth table above, will be equal to whatever $B \tand C$ is. By
     the substitution property, our proposition is now reduced to
     $$B \tand C \iff (\True \tand B) \tand C.$$ Doing the same thing
-    again, $$\True \tand B \iff B,$$ by our truth table. Therefore, we
-    can replace the left-hand side with $$B \tand C.$$ Our proposition
-    is now $$B \tand C \iff B \tand C,$$ which is true by the
-    reflexive property.
+    again, $$(\True \tand B) \tand C \iff B \tand C,$$ by our truth
+    table. Therefore, we can replace the right-hand side with
+    $$B \tand C.$$ Our proposition is now
+    $$B \tand C \iff B \tand C,$$ which is true by the reflexive
+    property.
   \item[Case $A$ is false] In this case, we have, on the left-hand
     side as $\False \tand (B \tand C)$. If you'll remember from the
     truth table, it doesn't matter what $B \tand C$ is, the entire
@@ -247,6 +428,12 @@ exercises.
     $$\False \iff \False,$$ which, again, is true by the reflexive property.
   \end{description}
 \end{proof}
+
+The rest of these lemmas are more or less ``obvious'', and they can
+all be proved by constructing truth tables. (Which is a specialized
+version of case analysis). The proofs of them are left as
+exercises. Again, if you are too lazy to do the exercises, at least
+convince yourself that the lemmas are true.
 
 \begin{lemma}
   \label{and-symmetry}
@@ -287,7 +474,17 @@ exercises.
 If we have some proposition $A$, we might want to say that $A$ is
 false. How do we go about doing that? The answer is with logical
 negation. We write $$\lnot A$$ to say \ctext{$A$ is false.} The
-expression $\lnot A$ should be read as ``not $A$.''
+expression $\lnot A$ should be read as ``not $A$.'' Here's the
+definition:
+
+\begin{definition}
+  Given a proposition $A$,
+
+  \begin{align*}
+    A \text{ is true} & \implies \lnot A \text{ is false, and} \\
+    A \text{ is false} & \implies \lnot A \text{ is true.}
+  \end{align*}
+\end{definition}
 
 Now that you know what negation is, I can explain the
 contrapositive. Given a proposition of the form $$A \implies B,$$ its
@@ -368,7 +565,7 @@ ever actually use Peirce's law directly, so it's okay if you can't
 figure out how to prove it, and aren't entirely convinced that it's
 true. If there comes a day when you do find yourself needing Peirce's
 law, you'll likely know logic well enough to prove its equivalence to
-the law of excluded middle. $\aleph$
+the law of excluded middle.
 
 \subsection{Exercises}
 
@@ -393,6 +590,238 @@ the law of excluded middle. $\aleph$
 
 \section{Sets}
 \label{s:sets}
+
+In this section, we're going to go over the notion of sets. A set is a
+collection of things, called \term{elements}, with no notion of
+multiplicity or order. That is, all of the following are the same set:
+
+\begin{tabu} to \textwidth {rX[p]}
+  $\mset{1,2,3,4}$ \\
+  $\mset{4,2,3,1}$ & The order is different. \\
+  $\mset{1,2,4,1,4,3,1,2}$ & The order is different, and some of the elements are repeated. \\
+\end{tabu}
+
+To say \ctext{$x$ is an element of $A$,} we write $$x \in A.$$
+Sometimes, you'll see a lowercase Greek epsilon ($\epsilon$ or
+$\varepsilon$) used instead of $\in$, particularly when writing things
+by hand. In the interest of laziness, I (and others) will usually
+write write $$x, y \in A$$ in place of something like \ctext{$x \in A$
+  and $y \in A$.} To say \ctext{$x$ is \emph{not} an element of $A$,}
+you should write $$x \notin A.$$ For example,
+$$1 \in \mset{1,2,3,4},$$ but $$5 \notin \mset{1,2,3,4}.$$ In general,
+if you have some sort of binary relation, like $\in$, $\implies$, $=$,
+$\geq$, etc, crossing out the symbol indicates that it's not true.
+
+\begin{tabu} to \textwidth{X[r,p]l||rX[l,p]}
+  $x$ is an element of $A$ & $x \in A$ & $x \notin A$ & $x$ is not an element of $A$ \\
+  \tabucline \\
+  $P$ implies $Q$ & $P \implies Q$ & $P \notimplies Q$ & $P$ does not imply $Q$ \\
+  \tabucline \\
+  $a$ is equal to $b$ & $a = b$ & $a \ne b$ & $a$ is not equal to $b$
+\end{tabu}
+
+\subsection{Subsets and supersets}
+
+\sirrygraph{images/set-a-subset-b-gimped.png} We want to be able to
+say that a certain set is ``contained'' in another set. The notions of
+\term{subsets} and \term{supersets} follows.
+
+\begin{definition}
+  A set $X$ is an \term{improper subset}---or, just a
+  \term{subset}---of $Y$, written
+  $$X \subof Y$$ if $$a \in X \implies a \in Y.$$
+\end{definition}
+
+\begin{definition}
+  A set $X$ is a \term{proper subset} of $Y$, written $$X \psubof Y$$
+  if
+  $$a \in X \implies a \in Y,$$ and there is some $b \in Y$ such that
+  $b \notin X$.
+\end{definition}
+
+
+\question{So, what really is the difference between proper and
+  improper subsets?}
+
+An improper subset allows for the two sets to be equal. A proper
+subset asserts that, if $A \subof B$, then every element of $A$ is in
+$B$, but $B$ has some stuff that $A$ does not.
+
+\question{How do you tell if two sets are equal?}
+
+We'll get to that in a minute, don't worry.
+
+\begin{remark}
+  Some people use the symbol $\psubof$ to refer to improper subsets,
+  and the something like $\subsetneqq$ to refer to proper subsets.
+
+  It turns out that improper subsets will be a lot more useful than
+  proper subsets. Likewise, we'll discover that $\le$ and $\ge$ are
+  much more common than $<$ and $>$, respectively.
+
+  That being said it \emph{would} make sense to use the simpler symbol
+  $\subset$ for the more common concept.  However, I don't like using
+  $\psubof$ to refer to improper subsets, so I won't. It's just
+  revolting. It's like when someone scratches their fingernails on a
+  chalkboard. It's morally wrong.
+\end{remark}
+
+The opposite notion is a ``superset'': \ctext{$Y \supof X$ if and only
+  if $X \subof Y$.} The symbol $\psupof$ is defined analogously.
+
+\begin{lemma}
+  Every set is an improper subset of itself, but is not a proper
+  subset of itself.
+\end{lemma}
+
+\question{You said we would define when two sets are equal.}
+
+Alright, here you go. Two sets are equal when they have exactly the
+same elements.
+
+\begin{definition}
+  Two sets $A$ and $B$ are equal if \ctext{$A \subof B$ and
+    $B \subof A$,} that is $$x \in A \iff x \in B.$$
+\end{definition}
+
+\begin{aside}
+  Sets are kind of fun to play around with, and think of their various
+  properties. Hopefully, you can now see why I briefly introduced
+  propositional logic. Understanding implication is pretty important
+  when discussing sets, particularly with subsets and equality.
+\end{aside}
+
+Moving on, there's a set with no elements called the \term{null
+  set}. The null set is usually denoted using $\emptyset$,
+$\varnothing$, $\phi$, $\Phi$, $\centernot 0$, or some variant
+thereof. I'm going to use $\emptyset$.
+
+\begin{lemma}
+  The null set is a subset of every set, including itself.
+\end{lemma}
+
+\subsection{Set comprehensions}
+
+Before we go much further, we need to introduce some notation, called
+``set comprehensions''. For reference, let
+$$A = \mset{1,2,3,4,5,6,7,8,9,10}.$$ A set comprehension looks
+something like this: $$\scomp{x \in A}{x < 5} = \mset{1,2,3,4},$$ or
+maybe $$\scomp{2x \in A}{x \le 5} = \mset{2,4,6,8,10}.$$
+
+\answergraph{images/set-comprehension-gimped.png}
+
+It's alright if you don't quite get the notation yet, you will over
+time.
+
+\subsection{Unions, Intersections, and Subtractions}
+
+\sillygraph{images/set-a-b-amb-union-gimped.png} The \term{union} of
+two sets is the set of all elements in either set. You could spend ten
+minutes trying to understand that wordtastrophe, or you can look at
+this definition
+
+\begin{definition}
+  The \term{union} of two sets $A$ and $B$ is $$A \cup B = \scomp{x
+    \in \Amb}{x \in A \tor x \in B}$$
+\end{definition}
+
+\question{What on earth is $\Amb$?}
+
+It's a jaunty $A$. It stands for ``ambient set''. We sort of have to
+assume that $A$ and $B$ are both subsets of $\Amb$. I'll explain
+\emph{why} later on in the chapter.
+
+\begin{example}
+  Let $$\Amb = {1,2,3,4,5,\dots,98,99,100}.$$ Calculate the following:
+
+  \begin{enumerate}
+  \item $\mset{1,2,3,4} \union \mset{9,10,11,12}$,
+  \item $\mset{12, 13,21,24,30} \union \mset{32,45,62,75,88}$,
+  \item $\scomp{x \in \Amb}{x \le 40} \union \scomp{x \in \Amb}{x \ge 60}$,
+  \item $\scomp{x \in \Amb}{x \le 60} \union \scomp{x \in \Amb}{x \ge 40}$.
+  \end{enumerate}
+
+  \begin{solution}
+    \begin{enumerate}
+    \item $\mset{1,2,3,4,9,10,11,12}$,
+    \item $\mset{12, 13,21,24, 30, 32,45,62,75,88}$,
+    \item $\scomp{x \in \Amb}{x \le 40 \tor 60 \le x}$,
+    \item $\Amb$.
+    \end{enumerate}
+  \end{solution}
+\end{example}
+
+These properties follow immediately from what we previously proved in
+\cref{props-proofs}. You can prove them if you want. I won't.
+
+\begin{lemma}
+  Given three sets $A$, $B$, and $C$, $$A \union (B \union C) = (A
+  \union B) \union C.$$
+\end{lemma}
+
+\begin{lemma}
+  Given two sets $A$ and $B$, $$A \union B = B \union A.$$
+\end{lemma}
+
+This one is equally obvious, but doesn't necessarily follow from the
+properties of logic.
+
+\begin{lemma}
+  Given a set $A$, $$A \union \emptyset = A.$$
+\end{lemma}
+
+\sirrygraph{images/set-a-b-amb-intersection-gimped.png} The
+\term{intersection} of two sets is the set of elements that are in
+both sets.
+
+\begin{definition}
+  The \term{intersection} of two sets $A$ and $B$ is
+  $$A \cap B = \scomp{x \in \Amb}{x \in A \tand x \in B}.$$
+\end{definition}
+
+\begin{example}
+  Let $$\Amb = {1,2,3,4,5,\dots,98,99,100}.$$ Calculate the following:
+
+  \begin{enumerate}
+  \item $\mset{13,34,80,89,91,94} \intersect \mset{13,15,34,69,89,94}$,
+  \item $\mset{14,34,38,89,98,100} \intersect \mset{3,9,34,38,98,100}$,
+  \item $\scomp{x \in \Amb}{x \le 40} \intersect \scomp{x \in \Amb}{60 \le x}$.
+  \item $\scomp{x \in \Amb}{40 \le x} \intersect \scomp{x \in \Amb}{x \le 60}$.
+  \end{enumerate}
+
+  \begin{solution}
+    \begin{enumerate}
+    \item $\mset{13,34,89,94}$
+    \item $\mset{34,38,98,100}$,
+    \item $\emptyset$
+    \item $\scomp{x \in \Amb}{40 \le x \le 60}$.
+    \end{enumerate}
+  \end{solution}
+\end{example}
+
+The following three lemmas are more or less ``obvious'':
+
+\begin{lemma}
+  Given a set $A$, $$A \cap \emptyset = \emptyset.$$
+\end{lemma}
+\begin{lemma}
+  Given two sets $A$ and $B$, $$A \cap B = B \cap A.$$
+\end{lemma}
+\begin{lemma}
+  Given three sets $A$, $B$, and $C$, $$A \cap (B \cap C) = (A \cap B)
+  \cap C.$$
+\end{lemma}
+
+\sillygraph{images/set-a-b-amb-subtraction-gimped.png} \term{Set
+  subtraction} is where you take all of the elements in one set that
+are not in the other:
+
+\begin{definition}
+  The \term{difference} of two sets $A$ and $B$ is
+  $$A \setminus B = \scomp{x \in \Amb}{x \in A \tand x \notin B}.$$
+\end{definition}
+
+
 
 \section{Natural numbers}
 \label{s:nats}
