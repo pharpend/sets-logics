@@ -8,11 +8,15 @@
 \usepackage{color}
 \usepackage{datetime}
 \usepackage{enumitem}
+\usepackage[mathcal]{euscript}
 \usepackage[answerdelayed]{exercise}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
 \usepackage{tabu}
 \usepackage{textcomp}
+\usepackage{wrapfig}
 
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
@@ -23,6 +27,7 @@
 \yyyymmdddate
 \renewcommand*{\dateseparator}{-}
 \addbibresource{sl.bib}
+\chapterstyle{chappell}
 
 \nocite{*}
 
@@ -34,7 +39,7 @@
   basicstyle=\tiny\ttfamily,     % the size of the fonts that are used for the code
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   breaklines=true,                 % sets automatic line breaking
-  captionpos=b,                    % sets the caption-position to bottom
+  captionpos=\null,                    % sets the caption-position to bottom
   commentstyle=\color{mygreen},    % comment style
   deletekeywords={...},            % if you want to delete keywords from the given language
   escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
@@ -89,10 +94,22 @@
 \newcommand{\tor}{\text{ or }}
 \newcommand{\True}{\text{True}}
 \newcommand{\False}{\text{False}}
+\newcommand{\subof}{\subseteq}
+\newcommand{\psubof}{\subset}
+\newcommand{\supof}{\supseteq}
+\newcommand{\psupof}{\supset}
+\newcommand{\question}[1]{\noindent\textbf{#1}}
+\newcommand{\ghci}{\path{ghci}}
+\newcommand{\Amb}{\mathscr{A}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
 
 \renewcommand{\implies}{\to}
+\newcommand{\notimplies}{\centernot\implies}
 \renewcommand{\impliedby}{\leftarrow}
+\newcommand{\notimpliedby}{\centernot\impliedby}
 \renewcommand{\iff}{\leftrightarrow}
+\newcommand{\notiff}{\centernot\iff}
 
 \newenvironment{alignmath}[1]
   {\begin{zz}\begin{tabu}{#1}}
@@ -106,8 +123,15 @@
 \newenvironment{zz}
   {\begin{equation*}}
   {\end{equation*}}
+\newenvironment{solution}
+  {\textbf{Solution. }}
+  {\qed}
 
-\newcommand{\answergraph}[1]{\includegraphics[width=0.8\textwidth]{#1}}
+\newcommand{\widegraph}[1]{\includegraphics[width=\textwidth]{#1}}
+\newcommand{\answergraph}[1]{\begin{figure*}[h]\centering\widegraph{#1}\end{figure*}}
+\newcommand{\smallgraph}[1]{\begin{figure*}[h]\centering\includegraphics[width=0.4\textwidth]{#1}\end{figure*}}
+\newcommand{\sillygraph}[1]{\begin{wrapfigure}{l}{0.4\textwidth}\centering\includegraphics[width=0.38\textwidth]{#1}\end{wrapfigure}}
+\newcommand{\sirrygraph}[1]{\begin{wrapfigure}{r}{0.4\textwidth}\centering\includegraphics[width=0.38\textwidth]{#1}\end{wrapfigure}}
 
 \theoremstyle{plain}
 \newtheorem{axiom}{Axiom}[section]
